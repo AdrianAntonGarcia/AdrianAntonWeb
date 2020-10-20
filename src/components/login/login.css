@@ -1,0 +1,8 @@
+
+.login-container {
+  margin: 15%;
+  margin-top: 10%;
+  padding: 3rem;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.3), 0 9px 26px 0 rgba(0, 0, 0, 0.30);
+  background-color: #fff;
+}

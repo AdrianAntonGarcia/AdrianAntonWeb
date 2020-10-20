@@ -8,7 +8,7 @@ import { PublicRoute } from './PublicRoute';
 export const AppRouter = () => {
   return (
     <Router>
-      <div>
+      <div id="divRouter">
         <Switch>
           <PublicRoute
             exact
