@@ -8,6 +8,7 @@ export const Login = (props) => {
     console.log(props);
     props.history.push('/');
   };
+
   return (
     <div className="login-container ">
       <form onSubmit={submitLogin}>
@@ -37,16 +38,22 @@ export const Login = (props) => {
           </div>
         </div>
         <div className="row justify-content-center mt-5">
-          <div className="col-3">
-            <a href="/login" className="ForgetPwd">
+          <div className="col-5 text-center">
+            <a href="/login" className="ForgetPwd ml-5">
               ¿Contraseña Olvidada?
             </a>
+            <a href="/register" className="ForgetPwd ml-4">
+              Registrarse
+            </a>
           </div>
-          <div className="col-3">
+          <div className="col-5">
             <button type="submit" className="btn btn-primary ml-5">
               Login
             </button>
           </div>
+        </div>
+        <div className="row justify-content-center mt-5">
+          <div className="col text-left ml-5"></div>
         </div>
       </form>
     </div>
