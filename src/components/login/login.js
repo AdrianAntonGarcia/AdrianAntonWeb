@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './login.css';
-export const login = () => {
+export const Login = () => {
   return (
     <div className="login-container ">
       <div className="row justify-content-center">

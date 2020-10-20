@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { home } from '../components/home/home';
-import { login } from '../components/login/login';
+import { Login } from '../components/login/Login';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
@@ -13,7 +13,7 @@ export const AppRouter = () => {
           <PublicRoute
             exact
             path="/login"
-            component={login}
+            component={Login}
             isLoggedIn={false}
           />
           <PrivateRoute

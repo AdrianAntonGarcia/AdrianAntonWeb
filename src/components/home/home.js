@@ -1,9 +1,12 @@
 import React from 'react'
+import {Navbar} from '../shared/Navbar'
+
+
 
 export const home = () => {
     return (
         <div>
-            Home de la web
+            <Navbar/>
         </div>
     )
 }
