@@ -3,10 +3,10 @@ import {Navbar} from '../shared/Navbar'
 
 
 
-export const home = () => {
+export const home = (props) => {
     return (
         <div>
-            <Navbar/>
+            <Navbar props={props}/>
         </div>
     )
 }
