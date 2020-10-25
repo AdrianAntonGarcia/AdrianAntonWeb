@@ -11,9 +11,9 @@ import { types } from '../../types/types';
 export const startLogin = (email, password) => {
   return async (dispatch) => {
     const resp = await fetchSinToken('auth/login', { email, password }, 'POST');
-    
+
     const body = await resp.json();
-    console.log(body)
+
     if (body.ok) {
       localStorage.setItem('token', body.token);
       localStorage.setItem('token-init-date', new Date().getTime());
@@ -24,7 +24,7 @@ export const startLogin = (email, password) => {
         })
       );
     } else {
-      Swal.fire('Error', body.msg, 'error');
+      Swal.fire('Error', body.errorMsg, 'error');
     }
   };
 };
