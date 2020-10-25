@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './login.css';
+import './login.scss';
 export const Login = (props) => {
   const submitLogin = (e) => {
     e.preventDefault();
@@ -8,52 +8,43 @@ export const Login = (props) => {
   };
 
   return (
-    <div className="login-container ">
-      <form onSubmit={submitLogin}>
-        <div className="row justify-content-center">
-          <div className="col-12 text-center">
-            <h3>LOGIN</h3>
-          </div>
+    <form className="form-login ">
+      <div className="row mb-5 ">
+        <label className="col h1 text-center">AdriWeb</label>
+      </div>
+      <div className="row mb-3 ">
+        <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+          Correo:
+        </label>
+        <div className="col-sm-10">
+          <input type="email" className="form-control" id="inputEmail3" />
         </div>
-        <div className="row justify-content-center mt-5">
-          <div className="col-4">
-            <h6>Email:</h6>
-          </div>
-          <div className="col-6">
-            <div className="form-group">
-              <input type="email" className="form-control"></input>
-            </div>
-          </div>
+      </div>
+      <div className="row mb-5">
+        <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">
+          Contraseña:
+        </label>
+        <div className="col-sm-10">
+          <input type="password" className="form-control" id="inputPassword3" />
         </div>
-        <div className="row justify-content-center mt-4">
-          <div className="col-4">
-            <h6>Contraseña:</h6>
-          </div>
-          <div className="col-6 ">
-            <div className="form-group">
-              <input type="password" className="form-control"></input>
-            </div>
-          </div>
+      </div>
+
+      <div className="row mb-3">
+        <label className="col-6 col-form-label">
+          <a className="p-3" href="/register">
+            Registro
+          </a>
+        </label>
+        <div className="col-6 col-form-label text-right">
+          <button
+            type="submit"
+            onClick={submitLogin}
+            className="btn btn-primary mr-5"
+          >
+            Loguearse
+          </button>
         </div>
-        <div className="row justify-content-center mt-5">
-          <div className="col-6 text-center">
-            <a href="/login" className="ForgetPwd ml-5">
-              ¿Contraseña Olvidada?
-            </a>
-            <a href="/register" className="ForgetPwd ml-4">
-              Registrarse
-            </a>
-          </div>
-          <div className="col-4">
-            <button type="submit" className="btn btn-primary ml-5">
-              Login
-            </button>
-          </div>
-        </div>
-        <div className="row justify-content-center mt-5">
-          <div className="col text-left ml-5"></div>
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };

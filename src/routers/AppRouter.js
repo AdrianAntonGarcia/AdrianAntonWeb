@@ -9,29 +9,23 @@ import { PublicRoute } from './PublicRoute';
 export const AppRouter = () => {
   return (
     <Router>
-      <div id="divRouter">
-        <Switch>
-          <PublicRoute
-            exact
-            path="/login"
-            component={Login}
-            isLoggedIn={false}
-          />
-          <PublicRoute
-            exact
-            path="/register"
-            component={Register}
-            isLoggedIn={false}
-          />
-          <PrivateRoute
-            exact
-            path="/"
-            component={home}
-            isLoggedIn={true}
-          ></PrivateRoute>
-          <Redirect to="/login" />
-        </Switch>
-      </div>
+      <Switch>
+        <PublicRoute exact path="/login" component={Login} isLoggedIn={false} />
+
+        <PublicRoute
+          exact
+          path="/register"
+          component={Register}
+          isLoggedIn={false}
+        />
+        <PrivateRoute
+          exact
+          path="/"
+          component={home}
+          isLoggedIn={true}
+        ></PrivateRoute>
+        <Redirect to="/login" />
+      </Switch>
     </Router>
   );
 };

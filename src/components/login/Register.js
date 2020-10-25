@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './register.css';
+import './register.scss';
 export const Register = (props) => {
   console.log(props);
   const submitRegister = (e) => {
