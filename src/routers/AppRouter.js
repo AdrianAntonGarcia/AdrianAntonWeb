@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { home } from '../components/home/home';
 import { Login } from '../components/login/Login';
@@ -7,22 +8,27 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
 export const AppRouter = () => {
+  const { idUser } = useSelector((state) => state.auth);
   return (
     <Router>
       <Switch>
-        <PublicRoute exact path="/login" component={Login} isLoggedIn={false} />
-
+        <PublicRoute
+          exact
+          path="/login"
+          component={Login}
+          isLoggedIn={!!idUser}
+        />
         <PublicRoute
           exact
           path="/register"
           component={Register}
-          isLoggedIn={false}
+          isLoggedIn={!!idUser}
         />
         <PrivateRoute
           exact
           path="/"
           component={home}
-          isLoggedIn={true}
+          isLoggedIn={!!idUser}
         ></PrivateRoute>
         <Redirect to="/login" />
       </Switch>

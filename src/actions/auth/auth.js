@@ -19,7 +19,7 @@ export const startLogin = (email, password) => {
       localStorage.setItem('token-init-date', new Date().getTime());
       dispatch(
         login({
-          uid: body.user._id,
+          idUser: body.user._id,
           name: body.user.name,
         })
       );
