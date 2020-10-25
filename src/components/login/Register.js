@@ -8,69 +8,53 @@ export const Register = (props) => {
     props.history.push('/');
   };
   return (
-    <div className="register-container">
-      <form onSubmit={submitRegister}>
-        <div className="row justify-content-center">
-          <div className="col-12 text-center">
-            <h3>REGISTER</h3>
-          </div>
+    <form className="form-register ">
+      <div className="row mb-5 ">
+        <label className="col h1 text-center">AdriWeb - Registro</label>
+      </div>
+      <div className="row mb-3 ">
+        <label className="col-sm-5 col-form-label">Nombre:</label>
+        <div className="col-sm-7">
+          <input type="text" className="form-control" name="name" />
         </div>
-        <div className="row justify-content-center mt-5">
-          <div className="col-4">
-            <h6>Email:</h6>
-          </div>
-          <div className="col-6">
-            <div className="form-group">
-              <input type="email" className="form-control"></input>
-            </div>
-          </div>
+      </div>
+      <div className="row mb-3 ">
+        <label className="col-sm-5 col-form-label">Correo:</label>
+        <div className="col-sm-7">
+          <input type="email" className="form-control" name="email" />
         </div>
-        <div className="row justify-content-center mt-4">
-          <div className="col-4">
-            <h6>Nombre:</h6>
-          </div>
-          <div className="col-6">
-            <div className="form-group">
-              <input type="text" className="form-control"></input>
-            </div>
-          </div>
+      </div>
+      <div className="row mb-3">
+        <label className="col-sm-5 col-form-label">Contraseña:</label>
+        <div className="col-sm-7">
+          <input type="password" className="form-control" name="password" />
         </div>
-        <div className="row justify-content-center mt-4">
-          <div className="col-4">
-            <h6>Contraseña:</h6>
-          </div>
-          <div className="col-6 ">
-            <div className="form-group">
-              <input type="password" className="form-control"></input>
-            </div>
-          </div>
+      </div>
+      <div className="row mb-5">
+        <label className="col-sm-5 col-form-label">
+          Confirmación contraseña:
+        </label>
+        <div className="col-sm-7">
+          <input type="password" className="form-control" name="passwor2" />
         </div>
-        <div className="row justify-content-center mt-4">
-          <div className="col-4">
-            <h6>Repita la contraseña:</h6>
-          </div>
-          <div className="col-6 ">
-            <div className="form-group">
-              <input type="password" className="form-control"></input>
-            </div>
-          </div>
+      </div>
+
+      <div className="row mb-3">
+        <label className="col-6 col-form-label">
+          <a className="p-3" href="/login">
+            ¿Ya está registrado?
+          </a>
+        </label>
+        <div className="col-6 col-form-label text-right">
+          <button
+            type="submit"
+            onClick={submitRegister}
+            className="btn btn-primary mr-5"
+          >
+            Registrarse
+          </button>
         </div>
-        <div className="row justify-content-center mt-5">
-          <div className="col-6 text-center">
-            <a href="/login" className="ForgetPwd ml-4">
-              Ir al Login
-            </a>
-          </div>
-          <div className="col-4">
-            <button type="submit" className="btn btn-primary ml-5">
-              Registrarse
-            </button>
-          </div>
-        </div>
-        <div className="row justify-content-center mt-5">
-          <div className="col text-left ml-5"></div>
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };

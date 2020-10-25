@@ -10,22 +10,18 @@ export const Login = (props) => {
   return (
     <form className="form-login ">
       <div className="row mb-5 ">
-        <label className="col h1 text-center">AdriWeb</label>
+        <label className="col h1 text-center">AdriWeb - Login</label>
       </div>
       <div className="row mb-3 ">
-        <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-          Correo:
-        </label>
+        <label className="col-sm-2 col-form-label">Correo:</label>
         <div className="col-sm-10">
-          <input type="email" className="form-control" id="inputEmail3" />
+          <input type="email" className="form-control" />
         </div>
       </div>
       <div className="row mb-5">
-        <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">
-          Contraseña:
-        </label>
+        <label className="col-sm-2 col-form-label">Contraseña:</label>
         <div className="col-sm-10">
-          <input type="password" className="form-control" id="inputPassword3" />
+          <input type="password" className="form-control" />
         </div>
       </div>
 
