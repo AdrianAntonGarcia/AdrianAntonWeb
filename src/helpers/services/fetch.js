@@ -1,4 +1,4 @@
-const baseUrl = process.env.SERVICES_API_URL;
+const baseUrl = process.env.REACT_APP_SERVICES_API_URL;
 
 /**
  * Función para llamar a los servicios sin el token

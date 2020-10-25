@@ -1,10 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { startLogin } from '../../actions/auth/auth';
 
 import './login.scss';
-export const Login = (props) => {
+export const Login = () => {
+  const dispatch = useDispatch();
   const submitLogin = (e) => {
     e.preventDefault();
-    props.history.push('/');
+    dispatch(startLogin('adrtler@gmail.com', '123456'));
   };
 
   return (

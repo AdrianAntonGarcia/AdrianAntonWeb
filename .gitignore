@@ -4,7 +4,7 @@
 # variables de entorno
 
 .env
-
+.env.development
 # dependencies
 /node_modules
 /.pnp
