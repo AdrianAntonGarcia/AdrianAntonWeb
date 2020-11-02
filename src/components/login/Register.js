@@ -1,11 +1,19 @@
 import React from 'react';
+import { useForm } from '../../hooks/useForm/useForm';
 
 import './register.scss';
 export const Register = (props) => {
-  console.log(props);
+  const [values, handleInputChange] = useForm({
+    name: '',
+    email: '',
+    password: '',
+    password2: '',
+  });
+  const { name, email, password, password2 } = values;
+  console.log(values);
   const submitRegister = (e) => {
     e.preventDefault();
-    props.history.push('/');
+    props.history.push('/login');
   };
   return (
     <form className="form-register ">
@@ -15,19 +23,37 @@ export const Register = (props) => {
       <div className="row mb-3 ">
         <label className="col-sm-5 col-form-label">Nombre:</label>
         <div className="col-sm-7">
-          <input type="text" className="form-control" name="name" />
+          <input
+            type="text"
+            className="form-control"
+            name="name"
+            value={name}
+            onChange={handleInputChange}
+          />
         </div>
       </div>
       <div className="row mb-3 ">
         <label className="col-sm-5 col-form-label">Correo:</label>
         <div className="col-sm-7">
-          <input type="email" className="form-control" name="email" />
+          <input
+            type="email"
+            className="form-control"
+            name="email"
+            value={email}
+            onChange={handleInputChange}
+          />
         </div>
       </div>
       <div className="row mb-3">
         <label className="col-sm-5 col-form-label">Contraseña:</label>
         <div className="col-sm-7">
-          <input type="password" className="form-control" name="password" />
+          <input
+            type="password"
+            className="form-control"
+            name="password"
+            value={password}
+            onChange={handleInputChange}
+          />
         </div>
       </div>
       <div className="row mb-5">
@@ -35,7 +61,13 @@ export const Register = (props) => {
           Confirmación contraseña:
         </label>
         <div className="col-sm-7">
-          <input type="password" className="form-control" name="passwor2" />
+          <input
+            type="password"
+            className="form-control"
+            name="password2"
+            value={password2}
+            onChange={handleInputChange}
+          />
         </div>
       </div>
 

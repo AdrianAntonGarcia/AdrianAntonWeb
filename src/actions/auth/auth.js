@@ -10,44 +10,32 @@ import { types } from '../../types/types';
  */
 export const startLogin = (email, password) => {
   return async (dispatch) => {
-    const resp = await fetchSinToken('auth/login', { email, password }, 'POST');
-
-    const body = await resp.json();
-
-    /**
-     * Si la respuesta es correcta registramos el token y hacemos el login
-     */
-    if (body.ok && body.user._id != null) {
-      localStorage.setItem('token', body.token);
-      localStorage.setItem('token-init-date', new Date().getTime());
-      dispatch(
-        login({
-          idUser: body.user._id,
-          name: body.user.name,
-        })
+    try {
+      const resp = await fetchSinToken(
+        'auth/login',
+        { email, password },
+        'POST'
       );
-    } else {
-      if (typeof body.errorMsg === 'string') {
-        Swal.fire('Error', body.errorMsg, 'error');
+
+      const body = await resp.json();
+
+      /**
+       * Si la respuesta es correcta registramos el token y hacemos el login
+       */
+      if (body.ok && body.user._id != null) {
+        localStorage.setItem('token', body.token);
+        localStorage.setItem('token-init-date', new Date().getTime());
+        dispatch(
+          login({
+            idUser: body.user._id,
+            name: body.user.name,
+          })
+        );
       } else {
-        body.errorMsg.password?.msg && body.errorMsg.email?.msg
-          ? Swal.fire(
-              'Error en el login',
-              `${body.errorMsg.password?.msg} ${body.errorMsg.email?.msg}`,
-              'error'
-            )
-          : body.errorMsg.password?.msg
-          ? Swal.fire(
-              'Error en el login',
-              `${body.errorMsg.password?.msg}`,
-              'error'
-            )
-          : Swal.fire(
-              'Error en el login',
-              `${body.errorMsg.email?.msg}`,
-              'error'
-            );
+        manejarError(body);
       }
+    } catch (error) {
+      Swal.fire('Error interno', 'Hable con un administrador', 'error');
     }
   };
 };
@@ -60,3 +48,28 @@ const login = (user) => ({
   type: types.authLogin,
   payload: user,
 });
+
+/**
+ * Función que saca los errores al usuario del login a partir
+ * de los mensajes que llegan de la base de datos
+ * @param {*} body
+ */
+const manejarError = (body) => {
+  if (typeof body.errorMsg === 'string') {
+    Swal.fire('Error', body.errorMsg, 'error');
+  } else {
+    body.errorMsg.password?.msg && body.errorMsg.email?.msg
+      ? Swal.fire(
+          'Error en el login',
+          `${body.errorMsg.password?.msg} ${body.errorMsg.email?.msg}`,
+          'error'
+        )
+      : body.errorMsg.password?.msg
+      ? Swal.fire(
+          'Error en el login',
+          `${body.errorMsg.password?.msg}`,
+          'error'
+        )
+      : Swal.fire('Error en el login', `${body.errorMsg.email?.msg}`, 'error');
+  }
+};
