@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { startLogin } from '../../actions/auth/auth';
+import { useForm } from '../../hooks/useForm/useForm';
 
 import './login.scss';
 export const Login = () => {
+  const [values, handleInputChange, reset] = useForm({
+    email: '',
+    password: '',
+  });
+  const { email, password } = values;
   const dispatch = useDispatch();
+
   const submitLogin = (e) => {
     e.preventDefault();
-    dispatch(startLogin('adrtler@gmail.com', '123456'));
+    dispatch(startLogin(email, password));
+    reset();
   };
 
   return (
@@ -18,13 +26,25 @@ export const Login = () => {
       <div className="row mb-3 ">
         <label className="col-sm-2 col-form-label">Correo:</label>
         <div className="col-sm-10">
-          <input type="email" className="form-control" />
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleInputChange}
+            className="form-control"
+          />
         </div>
       </div>
       <div className="row mb-5">
         <label className="col-sm-2 col-form-label">Contraseña:</label>
         <div className="col-sm-10">
-          <input type="password" className="form-control" />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleInputChange}
+            className="form-control"
+          />
         </div>
       </div>
 
