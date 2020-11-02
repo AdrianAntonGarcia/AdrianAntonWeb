@@ -14,7 +14,10 @@ export const startLogin = (email, password) => {
 
     const body = await resp.json();
 
-    if (body.ok) {
+    /**
+     * Si la respuesta es correcta registramos el token y hacemos el login
+     */
+    if (body.ok && body.user._id != null) {
       localStorage.setItem('token', body.token);
       localStorage.setItem('token-init-date', new Date().getTime());
       dispatch(
@@ -24,7 +27,27 @@ export const startLogin = (email, password) => {
         })
       );
     } else {
-      Swal.fire('Error', body.errorMsg, 'error');
+      if (typeof body.errorMsg === 'string') {
+        Swal.fire('Error', body.errorMsg, 'error');
+      } else {
+        body.errorMsg.password?.msg && body.errorMsg.email?.msg
+          ? Swal.fire(
+              'Error en el login',
+              `${body.errorMsg.password?.msg} ${body.errorMsg.email?.msg}`,
+              'error'
+            )
+          : body.errorMsg.password?.msg
+          ? Swal.fire(
+              'Error en el login',
+              `${body.errorMsg.password?.msg}`,
+              'error'
+            )
+          : Swal.fire(
+              'Error en el login',
+              `${body.errorMsg.email?.msg}`,
+              'error'
+            );
+      }
     }
   };
 };
