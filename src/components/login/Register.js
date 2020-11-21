@@ -18,8 +18,10 @@ export const Register = (props) => {
   return (
     <form className="form-register ">
       <div className="row mb-5 ">
-        <label className="col h1 text-center">AdriWeb - Registro</label>
+        <label className="col h1 text-center">AdriWeb - Register</label>
       </div>
+      <hr/>
+      <br/>
       <div className="row mb-3 ">
         <label className="col-sm-5 col-form-label">Nombre:</label>
         <div className="col-sm-7">

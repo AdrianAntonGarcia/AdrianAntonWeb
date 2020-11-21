@@ -23,6 +23,8 @@ export const Login = () => {
       <div className="row mb-5 ">
         <label className="col h1 text-center">AdriWeb - Login</label>
       </div>
+      <hr/>
+      <br/>
       <div className="row mb-3 ">
         <label className="col-sm-2 col-form-label">Correo:</label>
         <div className="col-sm-10">
@@ -52,6 +54,9 @@ export const Login = () => {
         <label className="col-6 col-form-label">
           <a className="p-3" href="/register">
             Registro
+          </a>
+          <a className="p-3" href="/resendValidation">
+            Reenviar validación
           </a>
         </label>
         <div className="col-6 col-form-label text-right">
