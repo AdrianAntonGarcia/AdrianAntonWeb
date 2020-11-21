@@ -49,6 +49,10 @@ const login = (user) => ({
   payload: user,
 });
 
+export const logout = () => ({
+  type: types.authLogout,
+});
+
 /**
  * Función que saca los errores al usuario del login a partir
  * de los mensajes que llegan de la base de datos

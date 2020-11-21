@@ -1,9 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
+import { logout } from '../../actions/auth/auth';
+
+const logoutAction = logout;
 export const Navbar = ({props}) => {
+  const dispatch = useDispatch();
   console.log(props)
   const logout = (e) =>{
     e.preventDefault();
+    dispatch(logoutAction())
     props.history.push('/login');
   }
   return (
