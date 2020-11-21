@@ -49,6 +49,10 @@ const login = (user) => ({
   payload: user,
 });
 
+/**
+ * Acción síncrona que reseta el estado de la aplicación,
+ * una vez hecho esto, el router saca al usuario de la app
+ */
 export const logout = () => ({
   type: types.authLogout,
 });
@@ -58,7 +62,7 @@ export const logout = () => ({
  * de los mensajes que llegan de la base de datos
  * @param {*} body
  */
-const manejarError = (body) => {
+export const manejarError = (body) => {
   if (typeof body.errorMsg === 'string') {
     Swal.fire('Error', body.errorMsg, 'error');
   } else {

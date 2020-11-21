@@ -19,7 +19,7 @@ export const Login = () => {
   };
 
   return (
-    <form className="form-login ">
+    <form className="form-login">
       <div className="row mb-5 ">
         <label className="col h1 text-center">AdriWeb - Login</label>
       </div>

@@ -10,7 +10,6 @@ export const Register = (props) => {
     password2: '',
   });
   const { name, email, password, password2 } = values;
-  console.log(values);
   const submitRegister = (e) => {
     e.preventDefault();
     props.history.push('/login');
