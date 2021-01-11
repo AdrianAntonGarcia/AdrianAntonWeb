@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { startLogin } from '../../actions/auth/auth';
+
 import { useForm } from '../../hooks/useForm/useForm';
+import { startLogin } from '../../redux/actions/auth/auth';
 
 import './login.scss';
 export const Login = () => {
@@ -23,8 +24,8 @@ export const Login = () => {
       <div className="row mb-5 ">
         <label className="col h1 text-center">AdriWeb - Login</label>
       </div>
-      <hr/>
-      <br/>
+      <hr />
+      <br />
       <div className="row mb-3 ">
         <label className="col-sm-2 col-form-label">Correo:</label>
         <div className="col-sm-10">

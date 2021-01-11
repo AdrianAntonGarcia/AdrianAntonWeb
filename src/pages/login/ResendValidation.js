@@ -1,6 +1,6 @@
 import React from 'react';
 import Swal from 'sweetalert2';
-import { manejarError } from '../../actions/auth/auth';
+import { manejarError } from '../../redux/actions/auth/auth';
 import { fetchSinToken } from '../../helpers/services/fetch';
 import { useForm } from '../../hooks/useForm/useForm';
 
@@ -8,10 +8,10 @@ import { useHistory } from 'react-router-dom';
 
 import './resendValidation.scss';
 import { useState } from 'react';
-import { Loading } from '../shared/Loading';
+import { Loading } from '../../components/shared/Loading';
 
 export const ResendValidation = () => {
-  const [values, handleInputChange, reset] = useForm({
+  const [values, handleInputChange] = useForm({
     email: '',
   });
   const [loading, setLoading] = useState(false);

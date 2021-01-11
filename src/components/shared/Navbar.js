@@ -1,17 +1,16 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-
-import { logout } from '../../actions/auth/auth';
+import { logout } from '../../redux/actions/auth/auth';
 
 const logoutAction = logout;
-export const Navbar = ({props}) => {
+export const Navbar = ({ props }) => {
   const dispatch = useDispatch();
-  console.log(props)
-  const logout = (e) =>{
+  console.log(props);
+  const logout = (e) => {
     e.preventDefault();
-    dispatch(logoutAction())
+    dispatch(logoutAction());
     props.history.push('/login');
-  }
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/">

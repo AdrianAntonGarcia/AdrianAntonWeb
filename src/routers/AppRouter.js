@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
-import { home } from '../components/home/home';
-import { Login } from '../components/login/Login';
-import { Register } from '../components/login/Register';
-import { ResendValidation } from '../components/login/ResendValidation';
+import { home } from '../pages/home/home';
+import { Login } from '../pages/login/Login';
+import { Register } from '../pages/login/Register';
+import { ResendValidation } from '../pages/login/ResendValidation';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 

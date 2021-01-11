@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import { fetchSinToken } from '../../helpers/services/fetch';
+import { fetchSinToken } from '../../../helpers/services/fetch';
 import { types } from '../../types/types';
 
 /**
