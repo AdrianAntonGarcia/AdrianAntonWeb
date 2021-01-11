@@ -30,6 +30,7 @@ export const Login = () => {
           <input
             type="email"
             name="email"
+            maxLength="60"
             value={email}
             onChange={handleInputChange}
             className="form-control"
@@ -42,6 +43,7 @@ export const Login = () => {
           <input
             type="password"
             name="password"
+            maxLength="30"
             value={password}
             onChange={handleInputChange}
             className="form-control"
