@@ -15,7 +15,7 @@ export const Register = (props) => {
     props.history.push('/login');
   };
   return (
-    <form className="form-register ">
+    <form className="form-register">
       <div className="row mb-5 ">
         <label className="col h1 text-center">AdriWeb - Register</label>
       </div>
