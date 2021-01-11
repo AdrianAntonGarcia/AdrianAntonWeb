@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { home } from '../pages/home/home';
 import { Login } from '../pages/login/Login';
@@ -7,9 +7,12 @@ import { Register } from '../pages/login/Register';
 import { ResendValidation } from '../pages/login/ResendValidation';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import { AuthFacade } from '../redux/facades/auth/auth';
 
 export const AppRouter = () => {
-  const { idUser } = useSelector((state) => state.auth);
+  const {
+    authState: { idUser },
+  } = AuthFacade();
   return (
     <Router>
       <Switch>

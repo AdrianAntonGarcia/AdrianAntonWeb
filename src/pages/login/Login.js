@@ -1,8 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-
 import { useForm } from '../../hooks/useForm/useForm';
-import { startLogin } from '../../redux/actions/auth/auth';
+import { AuthFacade } from '../../redux/facades/auth/auth';
 
 import './login.scss';
 export const Login = () => {
@@ -11,11 +9,11 @@ export const Login = () => {
     password: '',
   });
   const { email, password } = values;
-  const dispatch = useDispatch();
+  const { startLoginFacade } = AuthFacade();
 
   const submitLogin = (e) => {
     e.preventDefault();
-    dispatch(startLogin(email, password));
+    startLoginFacade(email, password);
     reset();
   };
 
