@@ -25,8 +25,9 @@ export const Register = (props) => {
         'Por favor, revise el correo y active el usuario, después haga login',
         'success'
       );
+      props.history.push('/login');
     }
-    props.history.push('/login');
+
     reset();
   };
   return (

@@ -1,14 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../redux/actions/auth/auth';
 
-const logoutAction = logout;
+import { AuthFacade } from '../../redux/facades/auth/auth';
+
 export const Navbar = ({ props }) => {
-  const dispatch = useDispatch();
+  const { logout } = AuthFacade();
   console.log(props);
-  const logout = (e) => {
+  const logoutClick = (e) => {
+    logout();
     e.preventDefault();
-    dispatch(logoutAction());
+
     props.history.push('/login');
   };
   return (
@@ -50,7 +50,7 @@ export const Navbar = ({ props }) => {
             </a>
           </li>
         </ul>
-        <form onSubmit={logout} className="form-inline my-2 my-lg-0">
+        <form onSubmit={logoutClick} className="form-inline my-2 my-lg-0">
           <button className="btn btn-outline-danger my-2 my-sm-0" type="submit">
             Logout
           </button>

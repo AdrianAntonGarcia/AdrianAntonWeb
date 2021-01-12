@@ -28,8 +28,7 @@ export const startLogin = (email, password) => {
         localStorage.setItem('token-init-date', new Date().getTime());
         dispatch(
           login({
-            idUser: body.user._id,
-            name: body.user.name,
+            user: body.user,
           })
         );
       } else {
@@ -45,9 +44,41 @@ export const startLogin = (email, password) => {
  * Acción síncrona que guarda el estado del usuario
  * @param {*} user
  */
-const login = (user) => ({
+export const login = (user) => ({
   type: types.authLogin,
   payload: user,
+});
+
+/**
+ * Acción síncrona que pone el checking a true,
+ * para decir que la aplicación está cargando
+ */
+export const checkingTrue = () => ({
+  type: types.authCheckingTrue,
+});
+
+/**
+ * Acción síncrona que pone el checking a false,
+ * para decir que la aplicación ya ha terminado de cargar
+ */
+export const checkingFalse = () => ({
+  type: types.authCheckingFalse,
+});
+
+/**
+ * Acción síncrona que pone el logged a true,
+ * para decir que el usuario está logueado
+ */
+export const loggedTrue = () => ({
+  type: types.authLoggedTrue,
+});
+
+/**
+ * Acción síncrona que pone el checking a false,
+ * para decir que la aplicación ya ha terminado de cargar
+ */
+export const loggedFalse = () => ({
+  type: types.authLoggedFalse,
 });
 
 /**
