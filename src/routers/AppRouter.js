@@ -7,7 +7,7 @@ import { Register } from '../pages/login/Register';
 import { ResendValidation } from '../pages/login/ResendValidation';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
-import { AuthFacade } from '../redux/facades/auth/auth';
+import { AuthFacade } from '../redux/facades/auth/authFacade';
 import { Loading } from '../components/shared/Loading';
 
 export const AppRouter = () => {

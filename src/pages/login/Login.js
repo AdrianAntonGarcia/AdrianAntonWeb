@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from '../../hooks/useForm/useForm';
-import { AuthFacade } from '../../redux/facades/auth/auth';
+import { AuthFacade } from '../../redux/facades/auth/authFacade';
 
 import './login.scss';
 export const Login = () => {

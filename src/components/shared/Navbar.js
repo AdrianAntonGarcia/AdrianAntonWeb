@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AuthFacade } from '../../redux/facades/auth/auth';
+import { AuthFacade } from '../../redux/facades/auth/authFacade';
 
 export const Navbar = ({ props }) => {
   const { logout } = AuthFacade();

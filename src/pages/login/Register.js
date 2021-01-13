@@ -1,7 +1,7 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import { useForm } from '../../hooks/useForm/useForm';
-import { AuthFacade } from '../../redux/facades/auth/auth';
+import { AuthFacade } from '../../redux/facades/auth/authFacade';
 
 import './register.scss';
 export const Register = (props) => {
@@ -18,7 +18,7 @@ export const Register = (props) => {
     e.preventDefault();
     console.log(values);
     const resultado = await startRegisterFacade(name, email, password);
-    console.log(resultado);
+    reset();
     if (resultado) {
       Swal.fire(
         'Usuario Registrado',
@@ -27,8 +27,6 @@ export const Register = (props) => {
       );
       props.history.push('/login');
     }
-
-    reset();
   };
   return (
     <form className="form-register">

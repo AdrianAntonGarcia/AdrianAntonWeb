@@ -11,7 +11,7 @@ import {
   loggedFalse,
   loggedTrue,
   logout as logoutAction,
-} from '../../actions/auth/auth';
+} from '../../actions/auth/authActions';
 
 /**
  * Functional component que va a centralizar la lógica de los selectores
@@ -28,22 +28,37 @@ export const AuthFacade = () => {
     dispatch(startLogin(email, password));
   };
 
+  /**
+   * Ponemos el checking en true para mostrar el cargando
+   */
   const setCheckingTrue = () => {
     dispatch(checkingTrue());
   };
 
+  /**
+   * Ponemos el checking en false para quitar el cargando
+   */
   const setCheckingFalse = useCallback(() => {
     dispatch(checkingFalse());
   }, [dispatch]);
 
+  /**
+   * Ponemos el logged en true para indicar que el usuario esta logueado
+   */
   const setLoggedTrue = () => {
     dispatch(loggedTrue());
   };
 
+  /**
+   * Ponemos el logged en false para indicar que el usuario no esta logueado
+   */
   const setLoggedFalse = useCallback(() => {
     dispatch(loggedFalse());
   }, [dispatch]);
 
+  /**
+   * Función que limpia el store y el localStorage para salir de la app
+   */
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('token-init-date');

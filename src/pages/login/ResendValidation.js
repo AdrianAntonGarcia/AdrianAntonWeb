@@ -6,7 +6,10 @@ import { useHistory } from 'react-router-dom';
 import './resendValidation.scss';
 import { manejarError } from '../../helpers/errors';
 import { useDispatch } from 'react-redux';
-import { checkingTrue, checkingFalse } from '../../redux/actions/auth/auth';
+import {
+  checkingTrue,
+  checkingFalse,
+} from '../../redux/actions/auth/authActions';
 
 export const ResendValidation = () => {
   const [values, handleInputChange] = useForm({
