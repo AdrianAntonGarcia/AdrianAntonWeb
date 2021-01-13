@@ -4,9 +4,7 @@ import Navbar from '../../components/shared/Navbar';
 import { getAuth } from '../../redux/selectors/auth/authSelectors';
 import { checkingTrue } from '../../redux/actions/auth/authActions';
 
-const Home = ({ auth, history }) => {
-  //checkingTrue();
-  console.log(history);
+const Home = ({ history }) => {
   return (
     <div>
       <Navbar history={history} />
