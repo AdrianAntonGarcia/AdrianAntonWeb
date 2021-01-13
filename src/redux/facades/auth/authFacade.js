@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import { manejarError } from '../../../helpers/errors';
 import { fetchConToken, fetchSinToken } from '../../../helpers/services/fetch';
@@ -20,8 +20,6 @@ import {
 export const AuthFacade = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const dispatch = useCallback(useDispatch(), []);
-  /**Estado del auth */
-  const authState = useSelector((state) => state.auth);
 
   /**Función que realiza el login del usuario */
   const startLoginFacade = (email, password) => {
@@ -136,7 +134,6 @@ export const AuthFacade = () => {
   }, [dispatch, setCheckingFalse, setLoggedFalse]);
 
   return {
-    authState,
     startLoginFacade,
     startRegisterFacade,
     comprobarLogin,

@@ -2,14 +2,12 @@ import React from 'react';
 
 import { AuthFacade } from '../../redux/facades/auth/authFacade';
 
-export const Navbar = ({ props }) => {
+export const Navbar = ({ history }) => {
   const { logout } = AuthFacade();
-  console.log(props);
   const logoutClick = (e) => {
     logout();
     e.preventDefault();
-
-    props.history.push('/login');
+    history.push('/login');
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
