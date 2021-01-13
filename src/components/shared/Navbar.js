@@ -1,13 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import { AuthFacade } from '../../redux/facades/auth/authFacade';
+import { logout } from '../../redux/actions/auth/authActions';
 
-export const Navbar = ({ history }) => {
-  const { logout } = AuthFacade();
+const Navbar = ({ logout }) => {
   const logoutClick = (e) => {
-    logout();
     e.preventDefault();
-    history.push('/login');
+    logout();
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -57,3 +56,7 @@ export const Navbar = ({ history }) => {
     </nav>
   );
 };
+
+export default connect(null, { logout }, null, {
+  pure: false,
+})(Navbar);

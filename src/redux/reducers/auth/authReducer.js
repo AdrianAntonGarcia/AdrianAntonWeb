@@ -15,6 +15,8 @@ export const authReducer = (state = initialState, action) => {
     case types.authLogin:
       return { ...state, ...action.payload, checking: false, logged: true };
     case types.authLogout:
+      localStorage.removeItem('token');
+      localStorage.removeItem('token-init-date');
       return { checking: false, logged: false, user: null, name: '' };
     case types.authCheckingFalse:
       return { ...state, checking: false };

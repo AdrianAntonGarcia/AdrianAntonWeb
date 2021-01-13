@@ -1,7 +1,39 @@
 import Swal from 'sweetalert2';
 import { manejarError } from '../../../helpers/errors';
-import { fetchSinToken } from '../../../helpers/services/fetch';
+import { fetchConToken, fetchSinToken } from '../../../helpers/services/fetch';
 import { types } from '../../types/types';
+
+/**
+ * Función que comprueba que el usuario ya tuviera un token válido,
+ * para no tener que hacer checking de nuevo, le renovamos le token
+ */
+export const comprobarLogin = () => {
+  return async (dispatch) => {
+    try {
+      let token = localStorage.getItem('token');
+      // Si el token no existe
+      if (!token) {
+        dispatch(checkingFalse());
+        dispatch(loggedFalse());
+        return false;
+      }
+      const resp = await fetchConToken('auth/renew');
+      const body = await resp.json();
+      token = body.token;
+      // Asignamos el nuevo token
+      localStorage.setItem('token', token);
+      console.log(body);
+
+      dispatch(
+        login({
+          user: body.usuario,
+        })
+      );
+    } catch (error) {
+      console.log('Error en comprobación del login del usuario ' + error);
+    }
+  };
+};
 
 /**
  * Acción asíncrona que realiza el login del usuario, llamando a la base de datos y
@@ -36,6 +68,38 @@ export const startLogin = (email, password) => {
       }
     } catch (error) {
       Swal.fire('Error interno', 'Hable con un administrador', 'error');
+    }
+  };
+};
+
+/**
+ * Función que llama al servicio para registrar un nuevo usuario
+ * @param {*} name
+ * @param {*} email
+ * @param {*} password
+ */
+export const startRegister = (name, email, password) => {
+  return async (dispatch) => {
+    try {
+      dispatch(checkingTrue());
+      const resp = await fetchSinToken(
+        'auth/newUser',
+        { name, email, password },
+        'POST'
+      );
+      const body = await resp.json();
+      if (body.ok) {
+        dispatch(checkingFalse());
+        return true;
+      } else {
+        dispatch(checkingFalse());
+        manejarError(body);
+        return false;
+      }
+    } catch (error) {
+      console.log('Error en registro usuario: ' + error);
+      Swal.fire('Error interno', 'Hable con un administrador', 'error');
+      return false;
     }
   };
 };

@@ -1,19 +1,19 @@
 import React from 'react';
 import { useForm } from '../../hooks/useForm/useForm';
-import { AuthFacade } from '../../redux/facades/auth/authFacade';
+import { startLogin } from '../../redux/actions/auth/authActions';
 
 import './login.scss';
-export const Login = () => {
+import { connect } from 'react-redux';
+const Login = ({ startLogin }) => {
   const [values, handleInputChange, reset] = useForm({
     email: '',
     password: '',
   });
   const { email, password } = values;
-  const { startLoginFacade } = AuthFacade();
 
   const submitLogin = (e) => {
     e.preventDefault();
-    startLoginFacade(email, password);
+    startLogin(email, password);
     reset();
   };
 
@@ -73,3 +73,7 @@ export const Login = () => {
     </form>
   );
 };
+
+export default connect(null, { startLogin }, null, {
+  pure: false,
+})(Login);

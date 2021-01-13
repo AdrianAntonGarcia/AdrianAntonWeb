@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Navbar } from '../../components/shared/Navbar';
+import Navbar from '../../components/shared/Navbar';
 import { getAuth } from '../../redux/selectors/auth/authSelectors';
 import { checkingTrue } from '../../redux/actions/auth/authActions';
 

@@ -1,10 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import { useForm } from '../../hooks/useForm/useForm';
-import { AuthFacade } from '../../redux/facades/auth/authFacade';
+import { startRegister } from '../../redux/actions/auth/authActions';
 
 import './register.scss';
-export const Register = (props) => {
+const Register = ({ startRegister, history }) => {
   const [values, handleInputChange, reset] = useForm({
     name: '',
     email: '',
@@ -12,20 +13,21 @@ export const Register = (props) => {
     password2: '',
   });
   const { name, email, password, password2 } = values;
-  const { startRegisterFacade } = AuthFacade();
 
   const submitRegister = async (e) => {
     e.preventDefault();
+
     console.log(values);
-    const resultado = await startRegisterFacade(name, email, password);
+    const resultado = await startRegister(name, email, password);
+    console.log(resultado);
     reset();
     if (resultado) {
-      Swal.fire(
+      await Swal.fire(
         'Usuario Registrado',
         'Por favor, revise el correo y active el usuario, después haga login',
         'success'
       );
-      props.history.push('/login');
+      history.push('/login');
     }
   };
   return (
@@ -109,3 +111,7 @@ export const Register = (props) => {
     </form>
   );
 };
+
+export default connect(null, { startRegister }, null, {
+  pure: false,
+})(Register);

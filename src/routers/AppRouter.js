@@ -2,18 +2,17 @@ import React, { useEffect } from 'react';
 
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import Home from '../pages/home/home';
-import { Login } from '../pages/login/Login';
-import { Register } from '../pages/login/Register';
+import Login from '../pages/login/Login';
+import { connect } from 'react-redux';
+import Register from '../pages/login/Register';
 import { ResendValidation } from '../pages/login/ResendValidation';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
-import { AuthFacade } from '../redux/facades/auth/authFacade';
 import { Loading } from '../components/shared/Loading';
 import { getAuth } from '../redux/selectors/auth/authSelectors';
-import { connect } from 'react-redux';
+import { comprobarLogin } from '../redux/actions/auth/authActions';
 
-const AppRouter = ({ auth: { checking, logged } }) => {
-  const { comprobarLogin } = AuthFacade();
+const AppRouter = ({ auth: { checking, logged }, comprobarLogin, history }) => {
   useEffect(() => {
     comprobarLogin();
   }, [comprobarLogin]);
@@ -32,6 +31,7 @@ const AppRouter = ({ auth: { checking, logged } }) => {
           <PublicRoute
             exact
             path="/register"
+            history={history}
             component={Register}
             isLoggedIn={logged}
           />
@@ -59,6 +59,6 @@ const mapStateToProps = (state) => {
   return { auth };
 };
 
-export default connect(mapStateToProps, null, null, {
+export default connect(mapStateToProps, { comprobarLogin }, null, {
   pure: false,
 })(AppRouter);
