@@ -2,7 +2,6 @@ import React from 'react';
 import Swal from 'sweetalert2';
 import { fetchSinToken } from '../../helpers/services/fetch';
 import { useForm } from '../../hooks/useForm/useForm';
-import { useHistory } from 'react-router-dom';
 import './resendValidation.scss';
 import { manejarError } from '../../helpers/errors';
 import { connect } from 'react-redux';
@@ -11,12 +10,19 @@ import {
   checkingFalse,
 } from '../../redux/actions/auth/authActions';
 
-const ResendValidation = ({ checkingTrue, checkingFalse }) => {
+const ResendValidation = ({ checkingTrue, checkingFalse, history }) => {
   const [values, handleInputChange] = useForm({
     email: '',
   });
   const { email } = values;
-  const history = useHistory();
+
+  /**
+   * Función que nvuelve al login
+   */
+  const volver = () => {
+    history.push('/auth/login');
+  };
+
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -55,6 +61,12 @@ const ResendValidation = ({ checkingTrue, checkingFalse }) => {
       </div>
       <hr />
       <br />
+      <div className="row mb-3">
+        <label className="col-12 col-form-label">
+          Introduzca el email al que reenviar el código de activación del
+          usuario:
+        </label>
+      </div>
       <div className="row">
         <div className="col-6 col-form-label">
           <span>Correo del usuario:</span>
@@ -72,9 +84,9 @@ const ResendValidation = ({ checkingTrue, checkingFalse }) => {
       <br />
       <div className="row">
         <div className="col-6 col-form-label">
-          <a className="p-3" href="/login">
+          <button className="btn btn-primary mr-5" onClick={volver}>
             Volver
-          </a>
+          </button>
         </div>
         <div className="col-6 col-form-label">
           <button className="btn btn-primary">Enviar validación</button>

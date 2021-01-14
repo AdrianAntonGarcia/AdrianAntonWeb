@@ -4,13 +4,29 @@ import { startLogin } from '../../redux/actions/auth/authActions';
 
 import './login.scss';
 import { connect } from 'react-redux';
-const Login = ({ startLogin }) => {
+
+const Login = ({ startLogin, history }) => {
   const [values, handleInputChange, reset] = useForm({
     email: '',
     password: '',
   });
   const { email, password } = values;
-
+  /**
+   * Función que navega a la pantalla de enviar email de validación
+   */
+  const irReenvioValidacion = () => {
+    history.push('/auth/resendValidation');
+  };
+  /**
+   * Función que navega a la pantalla de registro
+   */
+  const irRegister = () => {
+    history.push('/auth/register');
+  };
+  /**
+   * Submit del login
+   * @param {*} e evento del submit
+   */
   const submitLogin = (e) => {
     e.preventDefault();
     startLogin(email, password);
@@ -24,6 +40,11 @@ const Login = ({ startLogin }) => {
       </div>
       <hr />
       <br />
+      <div className="row mb-3 ">
+        <label className="col-12 col-form-label">
+          Introduzca su correo y contraseña:
+        </label>
+      </div>
       <div className="row mb-3 ">
         <label className="col-sm-2 col-form-label">Correo:</label>
         <div className="col-sm-10">
@@ -53,12 +74,15 @@ const Login = ({ startLogin }) => {
 
       <div className="row mb-3">
         <label className="col-6 col-form-label">
-          <a className="p-3" href="/register">
+          <button className="btn btn-primary mr-2 p-1" onClick={irRegister}>
             Registro
-          </a>
-          <a className="p-3" href="/resendValidation">
+          </button>
+          <button
+            className="btn btn-primary  p-1"
+            onClick={irReenvioValidacion}
+          >
             Reenviar validación
-          </a>
+          </button>
         </label>
         <div className="col-6 col-form-label text-right">
           <button

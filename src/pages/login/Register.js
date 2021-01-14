@@ -14,12 +14,20 @@ const Register = ({ startRegister, history }) => {
   });
   const { name, email, password, password2 } = values;
 
+  /**
+   * Función que navega a la pantalla de registro
+   */
+  const irLogin = () => {
+    history.push('/auth/login');
+  };
+
+  /**
+   * Submit del register
+   * @param {*} e evento del submit
+   */
   const submitRegister = async (e) => {
     e.preventDefault();
-
-    console.log(values);
     const resultado = await startRegister(name, email, password);
-    console.log(resultado);
     reset();
     if (resultado) {
       await Swal.fire(
@@ -37,6 +45,11 @@ const Register = ({ startRegister, history }) => {
       </div>
       <hr />
       <br />
+      <div className="row mb-3 ">
+        <label className="col-12 col-form-label">
+          Rellene el formulario para crear un usuario:
+        </label>
+      </div>
       <div className="row mb-3 ">
         <label className="col-sm-5 col-form-label">Nombre:</label>
         <div className="col-sm-7">
@@ -94,9 +107,9 @@ const Register = ({ startRegister, history }) => {
 
       <div className="row mb-3">
         <label className="col-6 col-form-label">
-          <a className="p-3" href="/login">
+          <button className="btn btn-primary mr-5" onClick={irLogin}>
             ¿Ya está registrado?
-          </a>
+          </button>
         </label>
         <div className="col-6 col-form-label text-right">
           <button
