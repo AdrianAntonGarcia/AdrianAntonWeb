@@ -115,7 +115,7 @@ const Register = ({ startRegister, history }) => {
           <button
             type="submit"
             onClick={submitRegister}
-            className="btn btn-primary mr-5"
+            className="btn btn-success mr-5"
           >
             Registrarse
           </button>

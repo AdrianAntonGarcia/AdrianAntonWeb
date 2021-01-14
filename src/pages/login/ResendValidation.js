@@ -68,13 +68,14 @@ const ResendValidation = ({ checkingTrue, checkingFalse, history }) => {
         </label>
       </div>
       <div className="row">
-        <div className="col-6 col-form-label">
+        <div className="col-4 col-form-label">
           <span>Correo del usuario:</span>
         </div>
-        <div className="col-6">
+        <div className="col-8">
           <input
             type="email"
             name="email"
+            maxLength="60"
             value={email}
             onChange={handleInputChange}
             className="form-control"
@@ -89,7 +90,7 @@ const ResendValidation = ({ checkingTrue, checkingFalse, history }) => {
           </button>
         </div>
         <div className="col-6 col-form-label">
-          <button className="btn btn-primary">Enviar validación</button>
+          <button className="btn btn-success">Enviar validación</button>
         </div>
       </div>
     </form>

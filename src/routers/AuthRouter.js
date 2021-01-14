@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Login from '../pages/login/Login';
 import Register from '../pages/login/Register';
 import ResendValidation from '../pages/login/ResendValidation';
+import { SendChangePassEmail } from '../pages/login/SendChangePassEmail';
 
 export const AuthRouter = () => {
   return (
@@ -14,6 +15,11 @@ export const AuthRouter = () => {
           exact
           path="/auth/resendValidation"
           component={ResendValidation}
+        />
+        <Route
+          exact
+          path="/auth/sendChangePassEmail"
+          component={SendChangePassEmail}
         />
         <Redirect to="/auth/login" />
       </Switch>

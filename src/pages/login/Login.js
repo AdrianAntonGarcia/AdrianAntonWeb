@@ -24,6 +24,12 @@ const Login = ({ startLogin, history }) => {
     history.push('/auth/register');
   };
   /**
+   * Función que navega a la pantalla de registro
+   */
+  const irSendChangePassEmail = () => {
+    history.push('/auth/sendChangePassEmail');
+  };
+  /**
    * Submit del login
    * @param {*} e evento del submit
    */
@@ -88,11 +94,21 @@ const Login = ({ startLogin, history }) => {
           <button
             type="submit"
             onClick={submitLogin}
-            className="btn btn-primary mr-5"
+            className="btn btn-success mr-5"
           >
-            Loguearse
+            Login
           </button>
         </div>
+      </div>
+      <div className="row mb-3">
+        <label className="col-7 col-form-label text-left">
+          <button
+            className="btn btn-secondary mr-2 p-1"
+            onClick={irSendChangePassEmail}
+          >
+            ¿Contraseña olvidada?
+          </button>
+        </label>
       </div>
     </form>
   );
