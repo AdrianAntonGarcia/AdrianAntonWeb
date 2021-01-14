@@ -1,25 +1,56 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { manejarError } from '../../helpers/errors';
+import { fetchSinToken } from '../../helpers/services/fetch';
 import { useForm } from '../../hooks/useForm/useForm';
+import {
+  checkingFalse,
+  checkingTrue,
+} from '../../redux/actions/auth/authActions';
 
-export const SendChangePassEmail = ({ history }) => {
+const SendChangePassEmail = ({ checkingFalse, checkingTrue }) => {
   const [values, handleInputChange] = useForm({
     email: '',
   });
   const { email } = values;
-
+  const history = useHistory();
   /**
    * Función que nvuelve al login
    */
   const volver = () => {
     history.push('/auth/login');
   };
-  const onSubmit = (e) => {
+
+  const ChangePassEmail = async (email) => {
+    checkingTrue();
+    const resp = await fetchSinToken(
+      'auth/sendChangePassEmail',
+      { email },
+      'POST'
+    );
+    const body = await resp.json();
+    checkingFalse();
+    if (body.ok) {
+      await Swal.fire({
+        title: 'Instrucciones enviadas, revise su correo.',
+        confirmButtonText: `Ir al login`,
+        allowOutsideClick: false,
+      });
+      history.push('/auth/login');
+    } else {
+      manejarError(body);
+    }
+  };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
     console.log(`Submit: ${email}`);
     if (email.length < 1) {
       Swal.fire('Error', 'Email vacio, por favor introduzca uno', 'error');
     }
+    await ChangePassEmail(email);
   };
   return (
     <form className="form-resendValidation" onSubmit={onSubmit}>
@@ -65,3 +96,7 @@ export const SendChangePassEmail = ({ history }) => {
     </form>
   );
 };
+
+export default connect(null, { checkingFalse, checkingTrue }, null, {
+  pure: false,
+})(SendChangePassEmail);
