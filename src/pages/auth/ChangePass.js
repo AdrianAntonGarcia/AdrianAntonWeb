@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -15,24 +15,17 @@ const ChangePass = ({
   match: { params },
 }) => {
   const { token } = params;
-  const [mostrar, setMostrar] = useState(false);
-  console.log(mostrar);
-  useEffect(() => {
-    startCheckChangePass(token).then((res) => {
-      setMostrar(res);
-    });
-    return () => {
-      checkChangePassTrue();
-    };
-  }, [
-    startCheckChangePass,
-    checkChangePassTrue,
-    token,
-    checkChangePass,
-    history,
-  ]);
 
-  if (mostrar) {
+  useEffect(() => {
+    if (checkChangePass === true) startCheckChangePass(token);
+  }, [checkChangePass, startCheckChangePass, token]);
+
+  const irLogin = () => {
+    history.push('/auth/login');
+    checkChangePassTrue();
+  };
+
+  if (checkChangePass) {
     return (
       <div>
         <span>ChangePass page</span>
@@ -42,6 +35,7 @@ const ChangePass = ({
     return (
       <div>
         <span>No autorizado</span>
+        <button onClick={irLogin}>Ir login</button>
       </div>
     );
   }
@@ -58,20 +52,15 @@ const mapStateToProps = (state) => {
 };
 
 /**
- * Actualiza el componente solo si cambia el checkChangePass
+ * Si ha cambiado, no devolvemos para que deje de actualizarse
  * @param {*} next
  * @param {*} prev
  */
-const areStatesEqual = (next, prev) => {
-  console.log(next, prev);
-  return next.auth.checkChangePass !== prev.auth.checkChangePass;
-};
-export default connect(
-  mapStateToProps,
-  { startCheckChangePass, checkChangePassTrue },
-  null,
-  {
-    pure: true,
-    areStatesEqual,
-  }
-)(ChangePass);
+// const areStatesEqual = (next, prev) => {
+//   console.log(next, prev);
+//   return next.auth.checkChangePass !== prev.auth.checkChangePass;
+// };
+export default connect(mapStateToProps, {
+  startCheckChangePass,
+  checkChangePassTrue,
+})(ChangePass);
