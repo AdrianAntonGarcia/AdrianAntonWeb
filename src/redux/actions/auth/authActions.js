@@ -109,7 +109,8 @@ export const startRegister = (name, email, password) => {
 };
 
 /**
- *
+ * Acción que comprueba que el token sea válido y da acceso
+ * a la pantalla de cambio de contraseña
  * @param {*} token
  */
 export const startCheckChangePass = (token) => {
@@ -124,13 +125,38 @@ export const startCheckChangePass = (token) => {
       const body = await resp.json();
       if (body.ok) {
         dispatch(checkChangePassTrue());
-        return true;
+        return body.uid;
       } else {
         dispatch(checkChangePassFalse());
         return false;
       }
     } catch (error) {
       console.log('Error en checkChangePass: ' + error);
+      Swal.fire('Error interno', 'Hable con un administrador', 'error');
+      return false;
+    }
+  };
+};
+
+export const startChangingPass = (password, token) => {
+  return async (dispatch) => {
+    try {
+      dispatch(checkingTrue);
+      const resp = await fetchSinToken(
+        'auth/changePass/' + token,
+        { password },
+        'POST'
+      );
+      const body = await resp.json();
+      dispatch(checkingFalse);
+      if (body.ok) {
+        return true;
+      } else {
+        Swal.fire('Contraseña no cambiada', body.errorMsg, 'error');
+        return false;
+      }
+    } catch (error) {
+      console.log('Error en startChangingPass: ' + error);
       Swal.fire('Error interno', 'Hable con un administrador', 'error');
       return false;
     }

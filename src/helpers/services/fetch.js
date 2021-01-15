@@ -59,9 +59,15 @@ const fetchSinTokenParams = (endpoint, data, options = {}, method = 'GET') => {
  * @param {*} method Tipo de petición (POST, GET, PUT...)
  */
 
-const fetchConToken = (endpoint, data, method = 'GET') => {
+const fetchConToken = (endpoint, data, method = 'GET', tokenIn = null) => {
   const url = `${baseUrl}/${endpoint}`; // ej: localhost:4000/api/auth
-  const token = localStorage.getItem('token') || '';
+  let token = '';
+  if (!tokenIn) {
+    token = localStorage.getItem('token') || '';
+  } else {
+    token = tokenIn;
+  }
+
   if (method === 'GET') {
     return fetch(url, {
       method,
