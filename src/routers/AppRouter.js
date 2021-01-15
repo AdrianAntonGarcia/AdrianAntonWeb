@@ -44,6 +44,11 @@ const mapStateToProps = (state) => {
   const { checking, logged } = auth;
   return { checking, logged };
 };
+/**
+ * Si devuelve true, el mapStateToProps no es llamado
+ * @param {*} next
+ * @param {*} prev
+ */
 const areStatesEqual = (next, prev) => {
   return (
     next.auth.checking === prev.auth.checking &&

@@ -21,11 +21,6 @@ const ChangePass = ({
     startCheckChangePass(token).then((res) => {
       setMostrar(res);
     });
-
-    if (checkChangePass === false) {
-      history.push('/auth/login');
-      checkChangePassTrue();
-    }
     return () => {
       checkChangePassTrue();
     };
@@ -52,17 +47,31 @@ const ChangePass = ({
   }
 };
 
+/**
+ * Devolvemos el estado del auth
+ * @param {*} state
+ */
 const mapStateToProps = (state) => {
   const auth = getAuth(state);
   const { checkChangePass } = auth;
   return { checkChangePass };
 };
 
+/**
+ * Actualiza el componente solo si cambia el checkChangePass
+ * @param {*} next
+ * @param {*} prev
+ */
+const areStatesEqual = (next, prev) => {
+  console.log(next, prev);
+  return next.auth.checkChangePass !== prev.auth.checkChangePass;
+};
 export default connect(
   mapStateToProps,
   { startCheckChangePass, checkChangePassTrue },
   null,
   {
     pure: true,
+    areStatesEqual,
   }
 )(ChangePass);
