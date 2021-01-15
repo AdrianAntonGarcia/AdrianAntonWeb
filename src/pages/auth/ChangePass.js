@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -15,23 +15,41 @@ const ChangePass = ({
   match: { params },
 }) => {
   const { token } = params;
-  console.log(checkChangePass);
+  const [mostrar, setMostrar] = useState(false);
+  console.log(mostrar);
   useEffect(() => {
-    startCheckChangePass(token);
+    startCheckChangePass(token).then((res) => {
+      setMostrar(res);
+    });
+
+    if (checkChangePass === false) {
+      history.push('/auth/login');
+      checkChangePassTrue();
+    }
     return () => {
       checkChangePassTrue();
     };
-  }, [startCheckChangePass, checkChangePassTrue, token]);
+  }, [
+    startCheckChangePass,
+    checkChangePassTrue,
+    token,
+    checkChangePass,
+    history,
+  ]);
 
-  if (checkChangePass === false) {
-    checkChangePassTrue();
-    history.push('/auth/login');
+  if (mostrar) {
+    return (
+      <div>
+        <span>ChangePass page</span>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <span>No autorizado</span>
+      </div>
+    );
   }
-  return (
-    <div>
-      <span>ChangePass page</span>
-    </div>
-  );
 };
 
 const mapStateToProps = (state) => {
