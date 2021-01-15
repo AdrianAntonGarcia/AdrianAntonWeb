@@ -1,9 +1,9 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import Login from '../pages/login/Login';
-import Register from '../pages/login/Register';
-import ResendValidation from '../pages/login/ResendValidation';
-import SendChangePassEmail from '../pages/login/SendChangePassEmail';
+import Login from '../pages/auth/Login';
+import Register from '../pages/auth/Register';
+import ResendValidation from '../pages/auth/ResendValidation';
+import SendChangePassEmail from '../pages/auth/SendChangePassEmail';
 
 export const AuthRouter = () => {
   return (
