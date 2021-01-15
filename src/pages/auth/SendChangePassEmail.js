@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { manejarError } from '../../helpers/errors';
 import { fetchSinToken } from '../../helpers/services/fetch';
@@ -10,12 +9,11 @@ import {
   checkingTrue,
 } from '../../redux/actions/auth/authActions';
 
-const SendChangePassEmail = ({ checkingFalse, checkingTrue }) => {
+const SendChangePassEmail = ({ checkingFalse, checkingTrue, history }) => {
   const [values, handleInputChange] = useForm({
     email: '',
   });
   const { email } = values;
-  const history = useHistory();
   /**
    * Función que nvuelve al login
    */
@@ -38,19 +36,24 @@ const SendChangePassEmail = ({ checkingFalse, checkingTrue }) => {
         confirmButtonText: `Ir al login`,
         allowOutsideClick: false,
       });
-      history.push('/auth/login');
+      return true;
     } else {
       manejarError(body);
+      return false;
     }
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     console.log(`Submit: ${email}`);
     if (email.length < 1) {
       Swal.fire('Error', 'Email vacio, por favor introduzca uno', 'error');
     }
-    await ChangePassEmail(email);
+    const resp = ChangePassEmail(email);
+    console.log(resp);
+    if (resp) {
+      history.push('/auth/login');
+    }
   };
   return (
     <form className="form-resendValidation" onSubmit={onSubmit}>

@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useForm } from '../../hooks/useForm/useForm';
 import { startRegister } from '../../redux/actions/auth/authActions';
 
 import './register.scss';
-const Register = ({ startRegister, history }) => {
+const Register = ({ startRegister }) => {
   const [values, handleInputChange, reset] = useForm({
     name: '',
     email: '',
@@ -13,7 +14,7 @@ const Register = ({ startRegister, history }) => {
     password2: '',
   });
   const { name, email, password, password2 } = values;
-
+  const history = useHistory();
   /**
    * Función que navega a la pantalla de registro
    */
@@ -25,21 +26,23 @@ const Register = ({ startRegister, history }) => {
    * Submit del register
    * @param {*} e evento del submit
    */
-  const submitRegister = async (e) => {
+  const submitRegister = (e) => {
     e.preventDefault();
-    const resultado = await startRegister(name, email, password);
+    const resultado = startRegister(name, email, password);
     reset();
     if (resultado) {
-      await Swal.fire(
+      Swal.fire(
         'Usuario Registrado',
         'Por favor, revise el correo y active el usuario, después haga login',
         'success'
       );
       history.push('/login');
+    } else {
+      return;
     }
   };
   return (
-    <form className="form-register">
+    <form className="form-register" onSubmit={submitRegister}>
       <div className="row mb-5 ">
         <label className="col h1 text-center">AdriWeb - Register</label>
       </div>
@@ -107,16 +110,16 @@ const Register = ({ startRegister, history }) => {
 
       <div className="row mb-3">
         <label className="col-6 col-form-label">
-          <button className="btn btn-primary mr-5" onClick={irLogin}>
+          <button
+            className="btn btn-primary mr-5"
+            type="button"
+            onClick={irLogin}
+          >
             ¿Ya está registrado?
           </button>
         </label>
         <div className="col-6 col-form-label text-right">
-          <button
-            type="submit"
-            onClick={submitRegister}
-            className="btn btn-success mr-5"
-          >
+          <button type="submit" className="btn btn-success mr-5">
             Registrarse
           </button>
         </div>

@@ -85,12 +85,18 @@ const ResendValidation = ({ checkingTrue, checkingFalse, history }) => {
       <br />
       <div className="row">
         <div className="col-6 col-form-label">
-          <button className="btn btn-primary mr-5" onClick={volver}>
+          <button
+            className="btn btn-primary mr-5"
+            type="button"
+            onClick={volver}
+          >
             Volver
           </button>
         </div>
         <div className="col-6 col-form-label">
-          <button className="btn btn-success">Enviar validación</button>
+          <button className="btn btn-success" type="submit">
+            Enviar validación
+          </button>
         </div>
       </div>
     </form>

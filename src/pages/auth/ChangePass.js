@@ -15,7 +15,8 @@ const ChangePass = ({ match: { params } }) => {
       { queryParams: { token } },
       'POST'
     );
-    console.log(resp);
+    const body = await resp.json();
+    console.log(body);
   };
   return (
     <div>

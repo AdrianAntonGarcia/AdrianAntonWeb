@@ -1,9 +1,8 @@
 import React from 'react';
 import { useForm } from '../../hooks/useForm/useForm';
 import { startLogin } from '../../redux/actions/auth/authActions';
-
-import './login.scss';
 import { connect } from 'react-redux';
+import './login.scss';
 
 const Login = ({ startLogin, history }) => {
   const [values, handleInputChange, reset] = useForm({
@@ -40,7 +39,7 @@ const Login = ({ startLogin, history }) => {
   };
 
   return (
-    <form className="form-login">
+    <form className="form-login" onSubmit={submitLogin}>
       <div className="row mb-5 ">
         <label className="col h1 text-center">AdriWeb - Login</label>
       </div>
@@ -80,22 +79,23 @@ const Login = ({ startLogin, history }) => {
 
       <div className="row mb-3">
         <label className="col-6 col-form-label">
-          <button className="btn btn-primary mr-2 p-1" onClick={irRegister}>
+          <button
+            className="btn btn-primary mr-2 p-1"
+            type="button"
+            onClick={irRegister}
+          >
             Registro
           </button>
           <button
             className="btn btn-primary  p-1"
             onClick={irReenvioValidacion}
+            type="button"
           >
             Reenviar validación
           </button>
         </label>
         <div className="col-6 col-form-label text-right">
-          <button
-            type="submit"
-            onClick={submitLogin}
-            className="btn btn-success mr-5"
-          >
+          <button type="submit" className="btn btn-success mr-5">
             Login
           </button>
         </div>
@@ -104,6 +104,7 @@ const Login = ({ startLogin, history }) => {
         <label className="col-7 col-form-label text-left">
           <button
             className="btn btn-secondary mr-2 p-1"
+            type="button"
             onClick={irSendChangePassEmail}
           >
             ¿Contraseña olvidada?
