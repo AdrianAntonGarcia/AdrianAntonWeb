@@ -116,5 +116,5 @@ const Login = ({ startLogin, history }) => {
 };
 
 export default connect(null, { startLogin }, null, {
-  pure: false,
+  pure: true,
 })(Login);

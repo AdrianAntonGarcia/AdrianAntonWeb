@@ -8,9 +8,9 @@ import { PublicRoute } from './PublicRoute';
 import { Loading } from '../components/shared/Loading';
 import { getAuth } from '../redux/selectors/auth/authSelectors';
 import { comprobarLogin } from '../redux/actions/auth/authActions';
-import { AuthRouter } from './AuthRouter';
+import AuthRouter from './AuthRouter';
 
-const AppRouter = ({ auth: { checking, logged }, comprobarLogin }) => {
+const AppRouter = ({ checking, logged, comprobarLogin }) => {
   useEffect(() => {
     comprobarLogin();
   }, [comprobarLogin]);
@@ -41,9 +41,16 @@ const AppRouter = ({ auth: { checking, logged }, comprobarLogin }) => {
 
 const mapStateToProps = (state) => {
   const auth = getAuth(state);
-  return { auth };
+  const { checking, logged } = auth;
+  return { checking, logged };
 };
-
+const areStatesEqual = (next, prev) => {
+  return (
+    next.auth.checking === prev.auth.checking &&
+    next.auth.logged === prev.auth.logged
+  );
+};
 export default connect(mapStateToProps, { comprobarLogin }, null, {
-  pure: false,
+  pure: true,
+  areStatesEqual: areStatesEqual,
 })(AppRouter);

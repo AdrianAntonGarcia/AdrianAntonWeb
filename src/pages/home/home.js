@@ -18,5 +18,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { checkingTrue }, null, {
-  pure: false,
+  pure: true,
 })(Home);

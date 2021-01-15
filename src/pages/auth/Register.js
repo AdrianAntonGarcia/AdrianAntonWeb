@@ -129,5 +129,5 @@ const Register = ({ startRegister }) => {
 };
 
 export default connect(null, { startRegister }, null, {
-  pure: false,
+  pure: true,
 })(Register);

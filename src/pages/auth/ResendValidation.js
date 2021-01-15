@@ -104,5 +104,5 @@ const ResendValidation = ({ checkingTrue, checkingFalse, history }) => {
 };
 
 export default connect(null, { checkingTrue, checkingFalse }, null, {
-  pure: false,
+  pure: true,
 })(ResendValidation);

@@ -58,5 +58,5 @@ const Navbar = ({ logout }) => {
 };
 
 export default connect(null, { logout }, null, {
-  pure: false,
+  pure: true,
 })(Navbar);

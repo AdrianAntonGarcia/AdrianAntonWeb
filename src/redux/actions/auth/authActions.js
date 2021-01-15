@@ -1,6 +1,10 @@
 import Swal from 'sweetalert2';
 import { manejarError } from '../../../helpers/errors';
-import { fetchConToken, fetchSinToken } from '../../../helpers/services/fetch';
+import {
+  fetchConToken,
+  fetchSinToken,
+  fetchSinTokenParams,
+} from '../../../helpers/services/fetch';
 import { types } from '../../types/types';
 
 /**
@@ -105,12 +109,57 @@ export const startRegister = (name, email, password) => {
 };
 
 /**
+ *
+ * @param {*} token
+ */
+export const startCheckChangePass = (token) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchSinTokenParams(
+        'auth/validateToken',
+        {},
+        { queryParams: { token } },
+        'POST'
+      );
+      const body = await resp.json();
+      if (body.ok) {
+        dispatch(checkChangePassTrue());
+        return true;
+      } else {
+        dispatch(checkChangePassFalse());
+        return false;
+      }
+    } catch (error) {
+      console.log('Error en checkChangePass: ' + error);
+      Swal.fire('Error interno', 'Hable con un administrador', 'error');
+      return false;
+    }
+  };
+};
+
+/**
  * Acción síncrona que guarda el estado del usuario
  * @param {*} user
  */
 export const login = (user) => ({
   type: types.authLogin,
   payload: user,
+});
+
+/**
+ * Acción síncrona que pone el checkChangePass a true,
+ * para decir que se puede entrar a la página de cambio de pass
+ */
+export const checkChangePassTrue = () => ({
+  type: types.authCheckChangePassTrue,
+});
+
+/**
+ * Acción síncrona que pone el checkChangePass a false,
+ * para decir que se no puede entrar a la página de cambio de pass
+ */
+export const checkChangePassFalse = () => ({
+  type: types.authCheckChangePassFalse,
 });
 
 /**

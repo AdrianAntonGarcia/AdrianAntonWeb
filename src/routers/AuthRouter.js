@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import ChangePass from '../pages/auth/ChangePass';
 import Login from '../pages/auth/Login';
@@ -6,7 +7,7 @@ import Register from '../pages/auth/Register';
 import ResendValidation from '../pages/auth/ResendValidation';
 import SendChangePassEmail from '../pages/auth/SendChangePassEmail';
 
-export const AuthRouter = () => {
+const AuthRouter = () => {
   return (
     <div>
       <Switch>
@@ -28,3 +29,7 @@ export const AuthRouter = () => {
     </div>
   );
 };
+
+export default connect(null, null, null, {
+  pure: true,
+})(AuthRouter);

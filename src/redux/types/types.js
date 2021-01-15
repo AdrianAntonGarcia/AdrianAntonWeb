@@ -7,4 +7,7 @@ export const types = {
 
   authLoggedFalse: '[Auth] Logged false',
   authLoggedTrue: '[Auth] Logged true',
+
+  authCheckChangePassFalse: '[Auth] CheckChangePass false',
+  authCheckChangePassTrue: '[Auth] CheckChangePass true',
 };

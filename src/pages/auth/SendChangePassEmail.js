@@ -101,5 +101,5 @@ const SendChangePassEmail = ({ checkingFalse, checkingTrue, history }) => {
 };
 
 export default connect(null, { checkingFalse, checkingTrue }, null, {
-  pure: false,
+  pure: true,
 })(SendChangePassEmail);
