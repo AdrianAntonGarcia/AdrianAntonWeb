@@ -4,7 +4,7 @@ import { types } from '../../types/types';
  * Estado del auth
  */
 const initialState = {
-  checking: true,
+  checking: false,
   logged: false,
   user: null,
   name: '',
@@ -18,7 +18,7 @@ export const authReducer = (state = initialState, action) => {
     case types.authLogout:
       localStorage.removeItem('token');
       localStorage.removeItem('token-init-date');
-      return { checking: false, logged: false, user: null, name: '' };
+      return initialState;
     case types.authCheckingFalse:
       return { ...state, checking: false };
     case types.authCheckingTrue:
