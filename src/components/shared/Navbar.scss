@@ -1,3 +1,17 @@
+@import '../../styles//css/variables/variables.scss';
 .container {
   height: '100vh';
+}
+
+.menu-right {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.color-red {
+  color: $error-color !important;
+}
+
+.right {
+  flex: 1;
 }

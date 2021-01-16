@@ -10,11 +10,14 @@ const Navbar = ({ logout }) => {
     logout();
   };
   return (
-    <Header className="" theme="light">
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-        <Menu.Item key="1">nav 1</Menu.Item>
-        <Menu.Item key="2">nav 2</Menu.Item>
-        <Menu.Item key="3" onClick={logoutClick}>
+    <Header theme="light">
+      <Menu
+        className="menu-right"
+        theme="dark"
+        mode="horizontal"
+        // defaultSelectedKeys={['1']}
+      >
+        <Menu.Item className="color-red" key="1" onClick={logoutClick}>
           Logout
         </Menu.Item>
       </Menu>
