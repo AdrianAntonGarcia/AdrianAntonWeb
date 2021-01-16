@@ -1,15 +1,21 @@
 import React from 'react';
-import { useForm } from '../../hooks/useForm/useForm';
-import { startLogin } from '../../redux/actions/auth/authActions';
+import { Form, Input, Button } from 'antd';
 import { connect } from 'react-redux';
+import { startLogin } from '../../redux/actions/auth/authActions';
 import './login.scss';
 
+const layout = {
+  labelCol: { span: 5, margin: 10 },
+  wrapperCol: { span: 16 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 16, span: 4 },
+};
+const linksLayout = {
+  wrapperCol: { offset: 4 },
+};
+
 const Login = ({ startLogin, history }) => {
-  const [values, handleInputChange, reset] = useForm({
-    email: '',
-    password: '',
-  });
-  const { email, password } = values;
   /**
    * Función que navega a la pantalla de enviar email de validación
    */
@@ -33,86 +39,69 @@ const Login = ({ startLogin, history }) => {
    * @param {*} e evento del submit
    */
   const submitLogin = (e) => {
-    e.preventDefault();
+    console.log(e);
+    const { email, password } = e;
     startLogin(email, password);
-    reset();
+  };
+
+  const onFinishFailed = (e) => {
+    console.log(e);
   };
 
   return (
-    <form className="form-login" onSubmit={submitLogin}>
-      <div className="row mb-5 ">
-        <label className="col h1 text-center">AdriWeb - Login</label>
-      </div>
-      <hr />
-      <br />
-      <div className="row mb-3 ">
-        <label className="col-12 col-form-label">
-          Introduzca su correo y contraseña:
-        </label>
-      </div>
-      <div className="row mb-3 ">
-        <label className="col-sm-2 col-form-label">Correo:</label>
-        <div className="col-sm-10">
-          <input
-            type="email"
-            name="email"
-            maxLength="60"
-            value={email}
-            onChange={handleInputChange}
-            className="form-control"
-          />
-        </div>
-      </div>
-      <div className="row mb-5">
-        <label className="col-sm-2 col-form-label">Contraseña:</label>
-        <div className="col-sm-10">
-          <input
-            type="password"
-            name="password"
-            maxLength="30"
-            minLength="6"
-            value={password}
-            onChange={handleInputChange}
-            className="form-control"
-          />
-        </div>
-      </div>
+    <div className="form-login">
+      <Form
+        {...layout}
+        name="basic"
+        onFinish={submitLogin}
+        onFinishFailed={onFinishFailed}
 
-      <div className="row mb-3">
-        <label className="col-6 col-form-label">
-          <button
-            className="btn btn-primary mr-2 p-1"
-            type="button"
-            onClick={irRegister}
-          >
-            Registro
-          </button>
-          <button
-            className="btn btn-primary  p-1"
-            onClick={irReenvioValidacion}
-            type="button"
-          >
-            Reenviar validación
-          </button>
-        </label>
-        <div className="col-6 col-form-label text-right">
-          <button type="submit" className="btn btn-success mr-5">
-            Login
-          </button>
-        </div>
-      </div>
-      <div className="row mb-3">
-        <label className="col-7 col-form-label text-left">
-          <button
-            className="btn btn-secondary mr-2 p-1"
-            type="button"
-            onClick={irSendChangePassEmail}
-          >
+        // style={{ margin: '10px' }}
+      >
+        <Form.Item
+          label="Email"
+          name="email"
+          type="email"
+          rules={[
+            { required: true, message: 'Por favor, introduce tu email!' },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[
+            { required: true, message: 'Por favor, introduce tu contraseña!' },
+            {
+              required: true,
+              min: 6,
+              message: 'La contraseña debe tener al menos 6 caracteres',
+            },
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item {...tailLayout}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+        <Form.Item {...linksLayout}>
+          <Button type="link" htmlType="button" onClick={irRegister}>
+            Registrarse
+          </Button>
+          <Button type="link" htmlType="button" onClick={irSendChangePassEmail}>
             ¿Contraseña olvidada?
-          </button>
-        </label>
-      </div>
-    </form>
+          </Button>
+          <Button type="link" htmlType="button" onClick={irReenvioValidacion}>
+            Validar usuario
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 
