@@ -1,15 +1,17 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Typography, Divider } from 'antd';
 import { connect } from 'react-redux';
 import { startLogin } from '../../redux/actions/auth/authActions';
 import './login.scss';
 
+const { Title, Text } = Typography;
+
 const layout = {
   labelCol: { span: 5, margin: 10 },
-  wrapperCol: { span: 16 },
+  wrapperCol: { span: 12 },
 };
 const tailLayout = {
-  wrapperCol: { offset: 16, span: 4 },
+  wrapperCol: { offset: 14, span: 4 },
 };
 const linksLayout = {
   wrapperCol: { offset: 4 },
@@ -50,6 +52,11 @@ const Login = ({ startLogin, history }) => {
 
   return (
     <div className="form-login">
+      <Title level={2} className="title-margin">
+        ADRIWEB - LOGIN
+      </Title>
+      <Text className="title-margin">Ingrese su email y contraseña</Text>
+      <Divider></Divider>
       <Form
         {...layout}
         name="basic"
@@ -61,10 +68,12 @@ const Login = ({ startLogin, history }) => {
         <Form.Item
           label="Email"
           name="email"
-          type="email"
-          className="tam-email"
           rules={[
-            { required: true, message: 'Por favor, introduce tu email!' },
+            {
+              required: true,
+              type: 'email',
+              message: 'Por favor, introduce un email correcto!',
+            },
           ]}
         >
           <Input />
