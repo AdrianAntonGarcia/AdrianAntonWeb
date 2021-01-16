@@ -62,6 +62,7 @@ const Login = ({ startLogin, history }) => {
           label="Email"
           name="email"
           type="email"
+          className="tam-email"
           rules={[
             { required: true, message: 'Por favor, introduce tu email!' },
           ]}
