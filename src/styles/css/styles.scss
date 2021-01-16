@@ -1,0 +1,12 @@
+@import './antd.css';
+@import './variables/variables.scss';
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: $primary-color;
+}
+
+#root {
+  height: 100%;
+}
