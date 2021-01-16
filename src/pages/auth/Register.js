@@ -28,6 +28,14 @@ const Register = ({ startRegister }) => {
    */
   const submitRegister = (e) => {
     e.preventDefault();
+    if (password.length < 6) {
+      Swal.fire(
+        'Error',
+        'Las contraseña debe tener al menos 6 caracteres',
+        'error'
+      );
+      return;
+    }
     const resultado = startRegister(name, email, password);
     reset();
     if (resultado) {
@@ -61,6 +69,7 @@ const Register = ({ startRegister }) => {
             className="form-control"
             maxLength="30"
             name="name"
+            minLength="4"
             value={name}
             onChange={handleInputChange}
           />
@@ -87,6 +96,7 @@ const Register = ({ startRegister }) => {
             className="form-control"
             name="password"
             maxLength="30"
+            minLength="6"
             value={password}
             onChange={handleInputChange}
           />

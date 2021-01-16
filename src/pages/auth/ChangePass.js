@@ -42,6 +42,14 @@ const ChangePass = ({
       Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
       return;
     }
+    if (password.length < 6) {
+      Swal.fire(
+        'Error',
+        'Las contraseña debe tener al menos 6 caracteres',
+        'error'
+      );
+      return;
+    }
     startChangingPass(password, token).then((resultado) => {
       if (resultado === true) {
         Swal.fire(

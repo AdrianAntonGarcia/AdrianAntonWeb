@@ -70,6 +70,7 @@ const Login = ({ startLogin, history }) => {
             type="password"
             name="password"
             maxLength="30"
+            minLength="6"
             value={password}
             onChange={handleInputChange}
             className="form-control"
