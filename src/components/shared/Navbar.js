@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../../redux/actions/auth/authActions';
 import { Menu, Layout } from 'antd';
+import { LogoutOutlined } from '@ant-design/icons';
 import './Navbar.scss';
 
 const { Header } = Layout;
@@ -18,7 +19,7 @@ const Navbar = ({ logout }) => {
         // defaultSelectedKeys={['1']}
       >
         <Menu.Item className="color-red" key="1" onClick={logoutClick}>
-          Logout
+          Logout <LogoutOutlined />
         </Menu.Item>
       </Menu>
     </Header>
