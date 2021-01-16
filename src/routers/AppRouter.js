@@ -19,22 +19,16 @@ const AppRouter = ({ checking, logged, comprobarLogin }) => {
   }
   return (
     <Router>
-      <div>
-        <Switch>
-          <PublicRoute
-            path="/auth"
-            component={AuthRouter}
-            isLoggedIn={logged}
-          />
-          <PrivateRoute
-            exact
-            path="/"
-            component={Home}
-            isLoggedIn={logged}
-          ></PrivateRoute>
-          <Redirect to="/auth" />
-        </Switch>
-      </div>
+      <Switch>
+        <PublicRoute path="/auth" component={AuthRouter} isLoggedIn={logged} />
+        <PrivateRoute
+          exact
+          path="/"
+          component={Home}
+          isLoggedIn={logged}
+        ></PrivateRoute>
+        <Redirect to="/auth" />
+      </Switch>
     </Router>
   );
 };
