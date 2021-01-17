@@ -1,14 +1,17 @@
 .loading {
   width: 100%;
   max-width: 650px;
+
   height: auto;
   margin: auto;
   margin-top: 15%;
   padding: 50px;
+  padding-left: 70px;
+  padding-bottom: 120px;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.3), 0 9px 26px 0 rgba(0, 0, 0, 0.3);
   background-color: #fff;
 }
 
 .spanLoading {
-  font-size: 50px;
+  font-size: 150px;
 }

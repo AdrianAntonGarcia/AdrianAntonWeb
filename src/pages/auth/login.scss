@@ -14,3 +14,9 @@
 .title-margin {
   margin-left: 22%;
 }
+
+@media (max-width: 768px) {
+  .button-login {
+    width: 60%;
+  }
+}

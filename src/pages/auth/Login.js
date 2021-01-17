@@ -94,12 +94,12 @@ const Login = ({ startLogin, history }) => {
           <Input.Password />
         </Form.Item>
 
-        <Form.Item {...tailLayout}>
+        <Form.Item {...tailLayout} className="button-register">
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>
-        <Form.Item {...linksLayout}>
+        <Form.Item {...linksLayout} className="button-login">
           <Button type="link" htmlType="button" onClick={irRegister}>
             Registrarse
           </Button>

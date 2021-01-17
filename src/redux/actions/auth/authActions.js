@@ -26,7 +26,6 @@ export const comprobarLogin = () => {
       token = body.token;
       // Asignamos el nuevo token
       localStorage.setItem('token', token);
-      console.log(body);
 
       dispatch(
         login({
@@ -85,7 +84,6 @@ export const startLogin = (email, password) => {
 export const startRegister = (name, email, password) => {
   return async (dispatch) => {
     try {
-      dispatch(checkingTrue());
       const resp = await fetchSinToken(
         'auth/newUser',
         { name, email, password },
@@ -93,10 +91,8 @@ export const startRegister = (name, email, password) => {
       );
       const body = await resp.json();
       if (body.ok) {
-        dispatch(checkingFalse());
         return true;
       } else {
-        dispatch(checkingFalse());
         manejarError(body);
         return false;
       }
@@ -156,7 +152,6 @@ export const startChangingPass = (password, token) => {
         return false;
       }
     } catch (error) {
-      console.log('Error en startChangingPass: ' + error);
       Swal.fire('Error interno', 'Hable con un administrador', 'error');
       return false;
     }

@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Navbar from '../../components/shared/Navbar';
 import { getAuth } from '../../redux/selectors/auth/authSelectors';
 import { checkingTrue } from '../../redux/actions/auth/authActions';
-import { message, Layout, Breadcrumb } from 'antd';
+import { Layout, Breadcrumb } from 'antd';
 import './home.scss';
 const { Footer, Content } = Layout;
 
-const Home = ({ history }) => {
-  const [date, setDate] = useState(null);
-  const handleChange = (value) => {
-    message.info(
-      `Selected Date: ${value ? value.format('YYYY-MM-DD') : 'None'}`
-    );
-    setDate(value);
-  };
+const Home = () => {
   return (
     <Layout className="layout">
       <Navbar />
