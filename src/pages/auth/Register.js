@@ -19,7 +19,7 @@ const tailLayout = {
 };
 
 const linksLayout = {
-  wrapperCol: { span: 4 },
+  wrapperCol: { offset: 5, span: 4 },
 };
 const Register = ({ startRegister }) => {
   const [loading, setLoading] = useState(false);
@@ -51,7 +51,7 @@ const Register = ({ startRegister }) => {
       return;
     }
   };
-  if (loading) return <Loading />;
+  if (!loading) return <Loading />;
   return (
     <div className="form-register">
       <Title level={2} className="title-margin">
