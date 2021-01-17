@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Typography, Divider } from 'antd';
 import { connect } from 'react-redux';
 import { startLogin } from '../../redux/actions/auth/authActions';
 import './login.scss';
+import { Loading } from '../../components/shared/Loading';
 
 const { Title, Text } = Typography;
 
@@ -18,6 +19,7 @@ const linksLayout = {
 };
 
 const Login = ({ startLogin, history }) => {
+  const [loading, setLoading] = useState(false);
   /**
    * Función que navega a la pantalla de enviar email de validación
    */
@@ -40,11 +42,13 @@ const Login = ({ startLogin, history }) => {
    * Submit del login
    * @param {*} e evento del submit
    */
-  const submitLogin = (e) => {
+  const submitLogin = async (e) => {
     const { email, password } = e;
-    startLogin(email, password);
+    setLoading(true);
+    const resp = await startLogin(email, password);
+    if (resp === false) setLoading(false);
   };
-
+  if (loading) return <Loading />;
   return (
     <div className="form-login">
       <Title level={2} className="title-margin">

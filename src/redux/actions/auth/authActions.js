@@ -67,9 +67,11 @@ export const startLogin = (email, password) => {
         );
       } else {
         manejarError(body);
+        return false;
       }
     } catch (error) {
       Swal.fire('Error interno', 'Hable con un administrador', 'error');
+      return false;
     }
   };
 };
