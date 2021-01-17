@@ -11,7 +11,7 @@ const layout = {
   wrapperCol: { span: 12 },
 };
 const tailLayout = {
-  wrapperCol: { offset: 14, span: 4 },
+  wrapperCol: { offset: 10, span: 4 },
 };
 const linksLayout = {
   wrapperCol: { offset: 4 },
@@ -41,13 +41,8 @@ const Login = ({ startLogin, history }) => {
    * @param {*} e evento del submit
    */
   const submitLogin = (e) => {
-    console.log(e);
     const { email, password } = e;
     startLogin(email, password);
-  };
-
-  const onFinishFailed = (e) => {
-    console.log(e);
   };
 
   return (
@@ -57,14 +52,7 @@ const Login = ({ startLogin, history }) => {
       </Title>
       <Text className="title-margin">Ingrese su email y contraseña</Text>
       <Divider></Divider>
-      <Form
-        {...layout}
-        name="basic"
-        onFinish={submitLogin}
-        onFinishFailed={onFinishFailed}
-
-        // style={{ margin: '10px' }}
-      >
+      <Form {...layout} name="basic" onFinish={submitLogin}>
         <Form.Item
           label="Email"
           name="email"

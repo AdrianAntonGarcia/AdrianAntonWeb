@@ -53,9 +53,7 @@ const Register = ({ startRegister }) => {
       return;
     }
   };
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
   return (
     <div className="form-register">
       <Title level={2} className="title-margin">

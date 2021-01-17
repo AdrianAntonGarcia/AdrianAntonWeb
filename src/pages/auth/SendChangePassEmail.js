@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Form, Input, Button, Typography, Divider } from 'antd';
 import Swal from 'sweetalert2';
 import { manejarError } from '../../helpers/errors';
 import { fetchSinToken } from '../../helpers/services/fetch';
-import { useForm } from '../../hooks/useForm/useForm';
-import {
-  checkingFalse,
-  checkingTrue,
-} from '../../redux/actions/auth/authActions';
+import { Loading } from '../../components/shared/Loading';
+import './SendChangePassEmail.scss';
 
-const SendChangePassEmail = ({ checkingFalse, checkingTrue, history }) => {
-  const [values, handleInputChange] = useForm({
-    email: '',
-  });
-  const { email } = values;
+const { Title, Text } = Typography;
+
+const layout = {
+  labelCol: { span: 5, margin: 10 },
+  wrapperCol: { span: 12 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 9, span: 4 },
+};
+const linksLayout = {
+  wrapperCol: { offset: 4 },
+};
+
+const SendChangePassEmail = ({ history }) => {
+  const [loading, setLoading] = useState(false);
   /**
    * Función que nvuelve al login
    */
@@ -21,15 +29,19 @@ const SendChangePassEmail = ({ checkingFalse, checkingTrue, history }) => {
     history.push('/auth/login');
   };
 
+  /**
+   * Función que llama al servicio web para pedir un cambio de contraseña
+   * @param {*} email
+   */
   const ChangePassEmail = async (email) => {
-    checkingTrue();
+    setLoading(true);
     const resp = await fetchSinToken(
       'auth/sendChangePassEmail',
       { email },
       'POST'
     );
     const body = await resp.json();
-    checkingFalse();
+    setLoading(false);
     if (body.ok) {
       await Swal.fire({
         title: 'Instrucciones enviadas, revise su correo.',
@@ -43,63 +55,53 @@ const SendChangePassEmail = ({ checkingFalse, checkingTrue, history }) => {
     }
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(`Submit: ${email}`);
-    if (email.length < 1) {
-      Swal.fire('Error', 'Email vacio, por favor introduzca uno', 'error');
-    }
-    const resp = ChangePassEmail(email);
-    console.log(resp);
+  const onSubmit = async (e) => {
+    const { email } = e;
+    const resp = await ChangePassEmail(email);
     if (resp) {
       history.push('/auth/login');
     }
   };
+  if (loading) return <Loading />;
   return (
-    <form className="form-resendValidation" onSubmit={onSubmit}>
-      <div className="row mb-5 ">
-        <label className="col h1 text-center">AdriWeb - Change Pass</label>
-      </div>
-      <hr />
-      <br />
-      <div className="row mb-3">
-        <label className="col-12 col-form-label">
-          Introduzca el email al que mandar las instrucciones para restablecer
-          la contraseña:
-        </label>
-      </div>
-      <div className="row">
-        <div className="col-4 col-form-label">
-          <span>Correo del usuario:</span>
-        </div>
-        <div className="col-8">
-          <input
-            type="email"
-            name="email"
-            maxLength="60"
-            value={email}
-            onChange={handleInputChange}
-            className="form-control"
-          />
-        </div>
-      </div>
-      <br />
-      <div className="row">
-        <div className="col-6 col-form-label">
-          <button className="btn btn-primary mr-5" onClick={volver}>
-            Volver
-          </button>
-        </div>
-        <div className="col-6 col-form-label">
-          <button className="btn btn-success" type="submit" onSubmit={onSubmit}>
+    <div className="form-change-pass">
+      <Title level={2} className="title-margin">
+        ADRIWEB - CHANGE PASS
+      </Title>
+      <Text className="title-margin">
+        {' '}
+        Introduzca el email para cambiar la contraseña:
+      </Text>
+      <Divider></Divider>
+      <Form {...layout} name="basic" onFinish={onSubmit}>
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+              type: 'email',
+              message: 'Por favor, introduce un email correcto!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item {...tailLayout} className="button-change">
+          <Button type="primary" htmlType="submit">
             Solicitar cambio de contraseña
-          </button>
-        </div>
-      </div>
-    </form>
+          </Button>
+        </Form.Item>
+        <Form.Item {...linksLayout} className="button-back">
+          <Button type="link" htmlType="button" onClick={volver}>
+            Volver
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 
-export default connect(null, { checkingFalse, checkingTrue }, null, {
+export default connect(null, null, null, {
   pure: true,
 })(SendChangePassEmail);
