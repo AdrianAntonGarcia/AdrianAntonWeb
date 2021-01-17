@@ -19,14 +19,14 @@ export const authReducer = (state = initialState, action) => {
       localStorage.removeItem('token');
       localStorage.removeItem('token-init-date');
       return initialState;
-    case types.authCheckingFalse:
-      return { ...state, checking: false };
-    case types.authCheckingTrue:
-      return { ...state, checking: true };
     case types.authLoggedFalse:
       return { ...state, logged: false };
     case types.authLoggedTrue:
       return { ...state, logged: true };
+    case types.authCheckChangePassFalse:
+      return { ...state, checkChangePass: false };
+    case types.authCheckChangePassTrue:
+      return { ...state, checkChangePass: true };
     default:
       return state;
   }

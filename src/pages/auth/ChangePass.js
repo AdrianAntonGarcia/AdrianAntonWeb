@@ -2,13 +2,30 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import { useForm } from '../../hooks/useForm/useForm';
-
+import { Form, Input, Button, Typography, Divider } from 'antd';
 import {
   startCheckChangePass,
   checkChangePassTrue,
   startChangingPass,
 } from '../../redux/actions/auth/authActions';
 import { getAuth } from '../../redux/selectors/auth/authSelectors';
+import './ChangePass.scss';
+import { Loading } from '../../components/shared/Loading';
+
+const { Title, Text } = Typography;
+
+const layout = {
+  labelCol: { span: 5, margin: 10 },
+  wrapperCol: { span: 12 },
+};
+
+const tailLayout = {
+  wrapperCol: { offset: 10, span: 4 },
+};
+
+const linksLayout = {
+  wrapperCol: { offset: 5 },
+};
 
 const ChangePass = ({
   history,
@@ -18,16 +35,11 @@ const ChangePass = ({
   startChangingPass,
   match: { params },
 }) => {
-  const [values, handleInputChange] = useForm({
-    password: '',
-    password2: '',
-  });
-  const { password, password2 } = values;
+  const [loading, setLoading] = useState(false);
   const { token } = params;
-  const [, setUid] = useState(null);
   useEffect(() => {
     if (checkChangePass === true) {
-      startCheckChangePass(token).then(setUid);
+      startCheckChangePass(token);
     }
   }, [checkChangePass, startCheckChangePass, token]);
 
@@ -36,21 +48,11 @@ const ChangePass = ({
     checkChangePassTrue();
   };
 
-  const submitLogin = (e) => {
-    e.preventDefault();
-    if (password !== password2) {
-      Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
-      return;
-    }
-    if (password.length < 6) {
-      Swal.fire(
-        'Error',
-        'Las contraseña debe tener al menos 6 caracteres',
-        'error'
-      );
-      return;
-    }
+  const submitChange = async (e) => {
+    const { password } = e;
+    setLoading(true);
     startChangingPass(password, token).then((resultado) => {
+      if (resultado === false) setLoading(false);
       if (resultado === true) {
         Swal.fire(
           'Contraseña cambiada',
@@ -61,65 +63,70 @@ const ChangePass = ({
       }
     });
   };
-
+  if (loading) return <Loading />;
   if (checkChangePass) {
     return (
-      <form className="form-login" onSubmit={submitLogin}>
-        <div className="row mb-5 ">
-          <label className="col h1 text-center">AdriWeb - Change Pass</label>
-        </div>
-        <hr />
-        <br />
-        <div className="row mb-3 ">
-          <label className="col-12 col-form-label">
-            Introduzca la nueva contraseña:
-          </label>
-        </div>
-        <div className="row mb-3">
-          <label className="col-sm-5 col-form-label">Contraseña:</label>
-          <div className="col-sm-7">
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              maxLength="30"
-              value={password}
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
-        <div className="row mb-5">
-          <label className="col-sm-5 col-form-label">
-            Confirmación contraseña:
-          </label>
-          <div className="col-sm-7">
-            <input
-              type="password"
-              className="form-control"
-              name="password2"
-              maxLength="30"
-              value={password2}
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
-        <div className="row mb-3">
-          <label className="col-6 col-form-label">
-            <button
-              className="btn btn-primary mr-5"
-              type="button"
-              onClick={irLogin}
-            >
-              Volver al login
-            </button>
-          </label>
-          <div className="col-6 col-form-label text-right">
-            <button type="submit" className="btn btn-success mr-5">
+      <div className="form-register">
+        <Title level={2} className="title-margin">
+          ADRIWEB - CHANGE PASS
+        </Title>
+        <Text className="title-margin">
+          Complete el formulario para cambiar su contraseña:
+        </Text>
+        <Divider></Divider>
+        <Form {...layout} name="registerForm" onFinish={submitChange}>
+          <Form.Item
+            label="Nueva contraseña"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: 'Por favor, introduce tu contraseña!',
+              },
+              {
+                required: true,
+                min: 6,
+                message: 'La contraseña debe tener al menos 6 caracteres',
+              },
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item
+            label="Confirmación contraseña"
+            name="password2"
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: 'Por favor, confirma la contraseña!',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject('Las contraseñas no coinciden');
+                },
+              }),
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item {...tailLayout} className="button-register">
+            <Button type="primary" htmlType="submit">
               Cambiar contraseña
-            </button>
-          </div>
-        </div>
-      </form>
+            </Button>
+          </Form.Item>
+          <Form.Item {...linksLayout}>
+            <Button type="link" htmlType="button" onClick={irLogin}>
+              Ir login
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     );
   } else {
     return (

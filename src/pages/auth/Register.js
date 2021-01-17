@@ -22,6 +22,7 @@ const linksLayout = {
   wrapperCol: { span: 4 },
 };
 const Register = ({ startRegister }) => {
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
   /**
    * Función que navega a la pantalla de registro
@@ -29,9 +30,6 @@ const Register = ({ startRegister }) => {
   const irLogin = () => {
     history.push('/auth/login');
   };
-
-  const [loading, setLoading] = useState(false);
-
   /**
    * Submit del register
    * @param {*} e evento del submit
