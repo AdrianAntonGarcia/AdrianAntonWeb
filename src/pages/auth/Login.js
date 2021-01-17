@@ -12,7 +12,7 @@ const layout = {
   wrapperCol: { span: 12 },
 };
 const tailLayout = {
-  wrapperCol: { offset: 10, span: 4 },
+  wrapperCol: { offset: 14, span: 4 },
 };
 const linksLayout = {
   wrapperCol: { offset: 4 },
