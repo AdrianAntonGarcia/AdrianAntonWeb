@@ -5,12 +5,8 @@ import { useForm } from '../../hooks/useForm/useForm';
 import './resendValidation.scss';
 import { manejarError } from '../../helpers/errors';
 import { connect } from 'react-redux';
-import {
-  checkingTrue,
-  checkingFalse,
-} from '../../redux/actions/auth/authActions';
 
-const ResendValidation = ({ checkingTrue, checkingFalse, history }) => {
+const ResendValidation = ({ history }) => {
   const [values, handleInputChange] = useForm({
     email: '',
   });
@@ -26,10 +22,10 @@ const ResendValidation = ({ checkingTrue, checkingFalse, history }) => {
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
-      checkingTrue();
+
       const resp = await fetchSinToken('auth/resendEmail', { email }, 'POST');
       const body = await resp.json();
-      checkingFalse();
+
       /**
        * Si la respuesta es correcta notificamos al usuario de que revise el correo
        */
@@ -103,6 +99,6 @@ const ResendValidation = ({ checkingTrue, checkingFalse, history }) => {
   );
 };
 
-export default connect(null, { checkingTrue, checkingFalse }, null, {
+export default connect(null, null, null, {
   pure: true,
 })(ResendValidation);

@@ -5,18 +5,17 @@ import Home from '../pages/home/home';
 import { connect } from 'react-redux';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
-import { Loading } from '../components/shared/Loading';
 import { getAuth } from '../redux/selectors/auth/authSelectors';
 import { comprobarLogin } from '../redux/actions/auth/authActions';
 import AuthRouter from './AuthRouter';
 
-const AppRouter = ({ checking, logged, comprobarLogin }) => {
+const AppRouter = ({ logged, comprobarLogin }) => {
+  /**
+   * Comprobamos si el usuario está logueado o no
+   */
   useEffect(() => {
     comprobarLogin();
   }, [comprobarLogin]);
-  if (checking) {
-    return <Loading />;
-  }
   return (
     <Router>
       <Switch>
@@ -44,10 +43,7 @@ const mapStateToProps = (state) => {
  * @param {*} prev
  */
 const areStatesEqual = (next, prev) => {
-  return (
-    next.auth.checking === prev.auth.checking &&
-    next.auth.logged === prev.auth.logged
-  );
+  return next.auth.logged === prev.auth.logged;
 };
 export default connect(mapStateToProps, { comprobarLogin }, null, {
   pure: true,

@@ -27,10 +27,6 @@ export const authReducer = (state = initialState, action) => {
       return { ...state, logged: false };
     case types.authLoggedTrue:
       return { ...state, logged: true };
-    case types.authCheckChangePassFalse:
-      return { ...state, checkChangePass: false };
-    case types.authCheckChangePassTrue:
-      return { ...state, checkChangePass: true };
     default:
       return state;
   }

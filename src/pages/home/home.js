@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Navbar from '../../components/shared/Navbar';
 import { getAuth } from '../../redux/selectors/auth/authSelectors';
-import { checkingTrue } from '../../redux/actions/auth/authActions';
 import { Layout, Breadcrumb } from 'antd';
 import './home.scss';
 const { Footer, Content } = Layout;
@@ -31,6 +30,6 @@ const mapStateToProps = (state) => {
   return { auth };
 };
 
-export default connect(mapStateToProps, { checkingTrue }, null, {
+export default connect(mapStateToProps, null, null, {
   pure: true,
 })(Home);

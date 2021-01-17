@@ -17,7 +17,6 @@ export const comprobarLogin = () => {
       let token = localStorage.getItem('token');
       // Si el token no existe
       if (!token) {
-        dispatch(checkingFalse());
         dispatch(loggedFalse());
         return false;
       }
@@ -137,14 +136,12 @@ export const startCheckChangePass = (token) => {
 export const startChangingPass = (password, token) => {
   return async (dispatch) => {
     try {
-      dispatch(checkingTrue);
       const resp = await fetchSinToken(
         'auth/changePass/' + token,
         { password },
         'POST'
       );
       const body = await resp.json();
-      dispatch(checkingFalse);
       if (body.ok) {
         return true;
       } else {
@@ -181,22 +178,6 @@ export const checkChangePassTrue = () => ({
  */
 export const checkChangePassFalse = () => ({
   type: types.authCheckChangePassFalse,
-});
-
-/**
- * Acción síncrona que pone el checking a true,
- * para decir que la aplicación está cargando
- */
-export const checkingTrue = () => ({
-  type: types.authCheckingTrue,
-});
-
-/**
- * Acción síncrona que pone el checking a false,
- * para decir que la aplicación ya ha terminado de cargar
- */
-export const checkingFalse = () => ({
-  type: types.authCheckingFalse,
 });
 
 /**
