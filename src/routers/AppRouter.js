@@ -21,8 +21,7 @@ const AppRouter = ({ logged, comprobarLogin }) => {
       <Switch>
         <PublicRoute path="/auth" component={AuthRouter} isLoggedIn={logged} />
         <PrivateRoute
-          exact
-          path="/"
+          path="/home"
           component={Home}
           isLoggedIn={logged}
         ></PrivateRoute>
