@@ -44,7 +44,8 @@ export const comprobarLogin = () => {
  * @param {*} password
  */
 export const startLogin = (email, password) => {
-  return async (dispatch) => {
+  // return async (dispatch, getState) => {
+  return async (dispatch, getState) => {
     try {
       const resp = await fetchSinToken(
         'auth/login',

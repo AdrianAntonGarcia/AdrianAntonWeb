@@ -1,5 +1,5 @@
+// import { store } from '../../redux/store/store';
 const baseUrl = process.env.REACT_APP_SERVICES_API_URL;
-
 /**
  * Función para llamar a los servicios sin el token
  * @param {*} endpoint Servicio al que llamamos
@@ -8,6 +8,7 @@ const baseUrl = process.env.REACT_APP_SERVICES_API_URL;
  */
 
 const fetchSinToken = (endpoint, data, method = 'GET') => {
+  // console.log(store.getState());
   const url = `${baseUrl}/${endpoint}`; // ej: localhost:4000/api/auth
   if (method === 'GET') {
     return fetch(url);

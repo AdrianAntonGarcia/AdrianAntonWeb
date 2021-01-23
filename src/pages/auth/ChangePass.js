@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
-import { useForm } from '../../hooks/useForm/useForm';
 import { Form, Input, Button, Typography, Divider } from 'antd';
 import {
   startCheckChangePass,
