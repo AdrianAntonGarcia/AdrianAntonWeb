@@ -9,21 +9,34 @@ import './home.scss';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { AdminUsers } from './admin/AdminUsers';
 import { Prueba } from './admin/Prueba';
+import { Inicio } from './Inicio';
+import { AdminRoute } from '../../routers/AdminRoute';
 
 const { Footer, Content } = Layout;
 
-const Home = (props) => {
+const Home = ({ location, auth }) => {
   return (
     <Layout className="layout">
       <Navbar />
       <Layout>
-        <LateralMenu {...props} />
+        <LateralMenu {...location} />
         <Layout>
           <Content style={{ padding: '50px 50px' }}>
             <Switch>
-              <Route exact path="/home/users" component={AdminUsers} />
-              <Route exact path="/home/prueba" component={Prueba} />
-              <Redirect to="/home/users" />
+              <Route exact path="/home/inicio" component={Inicio} />
+              <AdminRoute
+                path="/home/users"
+                component={AdminUsers}
+                isAdmin={auth.user.role}
+              />
+              <AdminRoute
+                path="/home/prueba"
+                component={Prueba}
+                isAdmin={auth.user.role}
+              />
+              {/* <Route exact path="/home/users" component={AdminUsers} /> */}
+              {/* <Route exact path="/home/prueba" component={Prueba} /> */}
+              <Redirect to="/home/inicio" />
             </Switch>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
