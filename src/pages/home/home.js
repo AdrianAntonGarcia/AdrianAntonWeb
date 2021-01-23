@@ -19,7 +19,7 @@ const Home = ({ location, auth }) => {
     <Layout className="layout">
       <Navbar />
       <Layout>
-        <LateralMenu {...location} />
+        <LateralMenu {...location} user_role={auth.user.role} />
         <Layout>
           <Content style={{ padding: '50px 50px' }}>
             <Switch>

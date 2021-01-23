@@ -6,9 +6,8 @@ import { Link } from 'react-router-dom';
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-export const LateralMenu = ({ state }) => {
+export const LateralMenu = ({ state, user_role }) => {
   const [selectedKey, setselectedKey] = useState();
-
   useEffect(() => {
     if (state && state.sub === 'admin') {
       setselectedKey(state.option);
@@ -42,28 +41,30 @@ export const LateralMenu = ({ state }) => {
             </Link>
           </Menu.Item>
         </SubMenu>
-        <SubMenu key="admin" icon={<UserOutlined />} title="Administración">
-          <Menu.Item icon={<UserOutlined />} key="2">
-            <Link
-              to={{
-                pathname: '/home/users',
-                state: { sub: 'admin', option: '2' },
-              }}
-            >
-              Usuarios
-            </Link>
-          </Menu.Item>
-          <Menu.Item icon={<UserOutlined />} key="3">
-            <Link
-              to={{
-                pathname: '/home/prueba',
-                state: { sub: 'admin', option: '3' },
-              }}
-            >
-              Prueba
-            </Link>
-          </Menu.Item>
-        </SubMenu>
+        {user_role === 'Admin_role' && (
+          <SubMenu key="admin" icon={<UserOutlined />} title="Administración">
+            <Menu.Item icon={<UserOutlined />} key="2">
+              <Link
+                to={{
+                  pathname: '/home/users',
+                  state: { sub: 'admin', option: '2' },
+                }}
+              >
+                Usuarios
+              </Link>
+            </Menu.Item>
+            <Menu.Item icon={<UserOutlined />} key="3">
+              <Link
+                to={{
+                  pathname: '/home/prueba',
+                  state: { sub: 'admin', option: '3' },
+                }}
+              >
+                Prueba
+              </Link>
+            </Menu.Item>
+          </SubMenu>
+        )}
       </Menu>
     </Sider>
   );
