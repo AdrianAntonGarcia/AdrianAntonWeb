@@ -9,7 +9,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { AdminUsers } from './admin/AdminUsers';
 import { Prueba } from './admin/Prueba';
 import { Inicio } from './Inicio';
-import { AdminRoute } from '../../routers/AdminRoute';
 
 import './home.scss';
 
@@ -22,7 +21,7 @@ const Home = ({ location, auth }) => {
       <Layout>
         <LateralMenu {...location} user_role={auth?.user?.role} />
         <Layout>
-          <Content style={{ padding: '10px 10px' }}>
+          <Content style={{ padding: '30px 30px' }}>
             <Switch>
               <Route exact path="/home/inicio" component={Inicio} />
               <Route

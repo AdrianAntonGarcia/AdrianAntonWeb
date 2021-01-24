@@ -1,5 +1,5 @@
-import React from 'react';
-import { Table, Space, Divider, Button } from 'antd';
+import React, { useState } from 'react';
+import { Table, Space, Divider, Button, Input } from 'antd';
 
 import './adminUsers.scss';
 const columns = [
@@ -117,13 +117,21 @@ const data = [
 ];
 
 export const AdminUsers = () => {
+  const [numUsers, setNumUsers] = useState(6);
   return (
     <div>
       <Divider orientation="left">Listado de usuarios</Divider>
       <Table
-        pagination={{ pageSize: 6, position: 'topLeft' }}
+        pagination={{ pageSize: numUsers, position: ['bottomCenter'] }}
         columns={columns}
         dataSource={data}
+      />
+      <Input
+        type="number"
+        style={{ width: 120 }}
+        onChange={(ev) => {
+          setNumUsers(ev.target.value);
+        }}
       />
     </div>
   );
