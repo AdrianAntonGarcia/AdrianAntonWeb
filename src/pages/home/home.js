@@ -5,12 +5,13 @@ import { LateralMenu } from '../../components/shared/LateralMenu';
 import { getAuth } from '../../redux/selectors/auth/authSelectors';
 import { Layout } from 'antd';
 
-import './home.scss';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { AdminUsers } from './admin/AdminUsers';
 import { Prueba } from './admin/Prueba';
 import { Inicio } from './Inicio';
 import { AdminRoute } from '../../routers/AdminRoute';
+
+import './home.scss';
 
 const { Footer, Content } = Layout;
 
@@ -19,23 +20,23 @@ const Home = ({ location, auth }) => {
     <Layout className="layout">
       <Navbar />
       <Layout>
-        <LateralMenu {...location} user_role={auth.user.role} />
+        <LateralMenu {...location} user_role={auth?.user?.role} />
         <Layout>
-          <Content style={{ padding: '50px 50px' }}>
+          <Content style={{ padding: '10px 10px' }}>
             <Switch>
               <Route exact path="/home/inicio" component={Inicio} />
-              <AdminRoute
+              <Route
+                exact
                 path="/home/users"
                 component={AdminUsers}
                 isAdmin={auth.user.role}
               />
-              <AdminRoute
+              <Route
+                exact
                 path="/home/prueba"
                 component={Prueba}
                 isAdmin={auth.user.role}
               />
-              {/* <Route exact path="/home/users" component={AdminUsers} /> */}
-              {/* <Route exact path="/home/prueba" component={Prueba} /> */}
               <Redirect to="/home/inicio" />
             </Switch>
           </Content>

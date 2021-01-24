@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import Home from '../pages/home/Home';
@@ -8,27 +8,38 @@ import { PublicRoute } from './PublicRoute';
 import { getAuth } from '../redux/selectors/auth/authSelectors';
 import { comprobarLogin } from '../redux/actions/auth/authActions';
 import AuthRouter from './AuthRouter';
+import { Loading } from '../components/shared/Loading';
 
 const AppRouter = ({ logged, comprobarLogin }) => {
   /**
    * Comprobamos si el usuario está logueado o no
    */
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    comprobarLogin();
+    comprobarLogin().then(() => {
+      setLoading(false);
+    });
   }, [comprobarLogin]);
-  return (
-    <Router>
-      <Switch>
-        <PublicRoute path="/auth" component={AuthRouter} isLoggedIn={logged} />
-        <PrivateRoute
-          path="/home"
-          component={Home}
-          isLoggedIn={logged}
-        ></PrivateRoute>
-        <Redirect to="/auth" />
-      </Switch>
-    </Router>
-  );
+
+  if (loading) return <Loading />;
+  else
+    return (
+      <Router>
+        <Switch>
+          <PublicRoute
+            path="/auth"
+            component={AuthRouter}
+            isLoggedIn={logged}
+          />
+          <PrivateRoute
+            path="/home"
+            component={Home}
+            isLoggedIn={logged}
+          ></PrivateRoute>
+          <Redirect to="/auth" />
+        </Switch>
+      </Router>
+    );
 };
 
 const mapStateToProps = (state) => {
