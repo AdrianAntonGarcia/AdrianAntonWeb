@@ -7,11 +7,12 @@ import './Navbar.scss';
 
 const { Header } = Layout;
 const Navbar = ({ logout }) => {
-  const logoutClick = (e) => {
+  const logoutClick = () => {
     logout();
   };
   return (
     <Header theme="light">
+      <div className="logo">ADRI - WEB</div>
       <Menu
         className="menu-right"
         theme="dark"
