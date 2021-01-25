@@ -10,4 +10,6 @@ export const types = {
 
   authCheckChangePassFalse: '[Auth] CheckChangePass false',
   authCheckChangePassTrue: '[Auth] CheckChangePass true',
+
+  usersGetUsers: '[Users] GetUsers',
 };

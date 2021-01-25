@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Table, Space, Divider, Button, Input } from 'antd';
+import React from 'react';
+import { Table, Space, Divider, Button } from 'antd';
 
 import './adminUsers.scss';
+import Layout from 'antd/lib/layout/layout';
 const columns = [
   {
     title: 'Nombre',
@@ -60,9 +61,9 @@ const data = [
   },
   {
     key: '4',
-    nombre: 'Jim Green',
+    nombre: 'Joe Black',
     valido: 'true',
-    email: 'test1@outlook.com',
+    email: 'test2@outlook.com',
     role: 'user_role',
   },
   {
@@ -74,9 +75,9 @@ const data = [
   },
   {
     key: '6',
-    nombre: 'Jim Green',
+    nombre: 'Joe Black',
     valido: 'true',
-    email: 'test1@outlook.com',
+    email: 'test2@outlook.com',
     role: 'user_role',
   },
   {
@@ -88,9 +89,9 @@ const data = [
   },
   {
     key: '8',
-    nombre: 'Jim Green',
+    nombre: 'Joe Black',
     valido: 'true',
-    email: 'test1@outlook.com',
+    email: 'test2@outlook.com',
     role: 'user_role',
   },
   {
@@ -102,9 +103,9 @@ const data = [
   },
   {
     key: '10',
-    nombre: 'Jim Green',
+    nombre: 'Joe Black',
     valido: 'true',
-    email: 'test1@outlook.com',
+    email: 'test2@outlook.com',
     role: 'user_role',
   },
   {
@@ -114,25 +115,40 @@ const data = [
     email: 'test2@outlook.com',
     role: 'user_role',
   },
+  {
+    key: '12',
+    nombre: 'Joe Black',
+    valido: 'true',
+    email: 'test2@outlook.com',
+    role: 'user_role',
+  },
+  {
+    key: '13',
+    nombre: 'Joe Black',
+    valido: 'true',
+    email: 'test2@outlook.com',
+    role: 'user_role',
+  },
+  {
+    key: '14',
+    nombre: 'Joe Black',
+    valido: 'true',
+    email: 'test2@outlook.com',
+    role: 'user_role',
+  },
 ];
 
 export const AdminUsers = () => {
-  const [numUsers, setNumUsers] = useState(6);
   return (
-    <div>
+    <Layout>
       <Divider orientation="left">Listado de usuarios</Divider>
       <Table
-        pagination={{ pageSize: numUsers, position: ['bottomCenter'] }}
+        bodyStyle={{ minHeight: 'calc(100vh - 210px)' }}
+        scroll={{ x: 1000, y: 'calc(100vh - 310px)' }}
+        pagination={{ pageSize: 6, position: ['bottomCenter'] }}
         columns={columns}
         dataSource={data}
       />
-      <Input
-        type="number"
-        style={{ width: 120 }}
-        onChange={(ev) => {
-          setNumUsers(ev.target.value);
-        }}
-      />
-    </div>
+    </Layout>
   );
 };
